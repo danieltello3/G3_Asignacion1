@@ -6,7 +6,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_ulima_launcher"
+        android:icon="@mipmap/ic_ulgram_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Grupo3_Asignacion1"

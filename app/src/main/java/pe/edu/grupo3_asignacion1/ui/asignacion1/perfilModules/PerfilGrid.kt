@@ -37,7 +37,6 @@ fun PerfilGrid(){
         horizontalArrangement = Arrangement.spacedBy(15.dp),
         content = {
         items(tmpList){item ->
-            println(item)
             Box(modifier = Modifier.size(100.dp,140.dp)){
                 Image(painter = rememberImagePainter(data=item.url),
                     contentDescription = item.name,
