@@ -27,7 +27,7 @@ import pe.edu.grupo3_asignacion1.ui.theme.*
 @Composable
 @Preview(showBackground = true)
 fun PerfilFirstRow() {
-    Column(){
+    Column() {
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier
@@ -35,7 +35,9 @@ fun PerfilFirstRow() {
                 .padding(horizontal = 9.dp, vertical = 10.dp)
         ) {
             Column(
-                Modifier.weight(1.5f).align(Alignment.CenterVertically)
+                Modifier
+                    .weight(1.5f)
+                    .align(Alignment.CenterVertically)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.foto_perfil),
@@ -51,11 +53,12 @@ fun PerfilFirstRow() {
                 )
 
 
-
             }
-            Column(modifier = Modifier.align(Alignment.CenterVertically).weight(1f)) {
+            Column(modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .weight(1f)) {
                 Text(
-                    text = "100", fontSize = 20.sp, fontWeight = FontWeight.Bold,
+                    text = "100", fontSize = 24.sp, fontWeight = FontWeight.Bold,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis
@@ -63,7 +66,7 @@ fun PerfilFirstRow() {
                 Text(
                     text = "Publicaciones",
                     maxLines = 1,
-                    fontSize = 12.sp,
+                    fontSize = 17.sp,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally),
@@ -71,45 +74,39 @@ fun PerfilFirstRow() {
 
                     )
             }
-            Column(modifier = Modifier.weight(1f).align(Alignment.CenterVertically)) {
+            Column(modifier = Modifier
+                .weight(1f)
+                .align(Alignment.CenterVertically)) {
                 Text(
-                    text = "536", fontSize = 20.sp, fontWeight = FontWeight.Bold,
+                    text = "536", fontSize = 24.sp, fontWeight = FontWeight.Bold,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "Seguidores", fontSize = 12.sp,
+                    text = "Seguidores", fontSize = 17.sp,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis
                 )
             }
-            Column(modifier = Modifier.weight(1f).align(Alignment.CenterVertically)) {
+            Column(modifier = Modifier
+                .weight(1f)
+                .align(Alignment.CenterVertically)) {
                 Text(
-                    text = "536", fontSize = 20.sp, fontWeight = FontWeight.Bold,
+                    text = "536", fontSize = 24.sp, fontWeight = FontWeight.Bold,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "Seguidos", fontSize = 12.sp,
+                    text = "Seguidos", fontSize = 17.sp,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis
                 )
             }
         }
-
-        Text(
-            modifier = Modifier.padding(horizontal=9.dp),
-            text = "Armando Mendoza",
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Bold,
-            color = if (isSystemInDarkTheme()) Color.White else Color.Black,
-            overflow = TextOverflow.Ellipsis
-        )
-
 
 
     }

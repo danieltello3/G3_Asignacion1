@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.*
 
+
 //@Preview
 @Composable
 public fun PerfilScreenPreview(){
@@ -25,6 +26,7 @@ public fun PerfilScreen(){
     {
         //Archivo Brillitt
         PerfilFirstRow()
+        PerfilNombre()
         PerfilButtons()
         //Archivo Gonzalo
 
