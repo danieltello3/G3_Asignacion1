@@ -31,7 +31,6 @@ fun PerfilButtons() {
             .fillMaxWidth()
             .height(40.dp)
             .padding(1.dp)
-            //.background(Color.White)
     ) {
         Column(
             Modifier
