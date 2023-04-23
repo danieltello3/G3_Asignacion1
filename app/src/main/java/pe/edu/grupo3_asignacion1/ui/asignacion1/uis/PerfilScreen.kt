@@ -7,7 +7,7 @@ import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.PerfilGrid
 @Preview
 @Composable
 public fun PerfilScreenPreview(){
-
+    PerfilScreen()
 }
 @Composable
 public fun PerfilScreen(){

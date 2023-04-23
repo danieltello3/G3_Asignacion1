@@ -23,7 +23,7 @@ import pe.edu.grupo3_asignacion1.models.PhotoList
 @Preview
 @Composable
 fun PerfilGridPreview(){
-
+    PerfilGrid()
 }
 
 @Composable
