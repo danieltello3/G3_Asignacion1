@@ -29,11 +29,10 @@ public fun PerfilScreen(){
         PerfilNombre()
         PerfilButtons()
         //Archivo Gonzalo
-
+        HighlightsStories()
         //Archivo Daniel
         PerfilGrid()
     }
-
 
 
 }
