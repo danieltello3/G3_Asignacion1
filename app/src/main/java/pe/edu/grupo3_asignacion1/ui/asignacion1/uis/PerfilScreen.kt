@@ -14,7 +14,7 @@ import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.*
 //@Preview
 @Composable
 public fun PerfilScreenPreview(){
-
+    PerfilScreen()
 }
 @Preview(showBackground = true)
 @Composable
