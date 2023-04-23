@@ -25,7 +25,7 @@ fun HighlightsStoriesPreview(){
 
 @Composable
 fun HighlightsStories(){
-    Box(modifier = Modifier.fillMaxSize()){
+    Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp)){
         Column() {
             Text("Historias destacadas", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top= 10.dp), color = if(isSystemInDarkTheme()) Color.White else Color.Black)
             Text("Guarda tus historias favoritas en el perfil", modifier = Modifier.padding(top= 10.dp), color = if(isSystemInDarkTheme()) Color.White else Color.Black)
