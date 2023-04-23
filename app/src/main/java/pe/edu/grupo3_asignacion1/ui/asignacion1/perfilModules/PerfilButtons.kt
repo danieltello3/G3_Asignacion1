@@ -36,7 +36,6 @@ fun PerfilButtons() {
             .height(40.dp)
             .padding(1.dp)
             .padding(horizontal = 10.dp, vertical = 1.dp)
-            //.background(Color.White)
     ) {
         Column(
             Modifier
@@ -71,7 +70,6 @@ fun PerfilButtons() {
             Button(
                 onClick = { /* Acción al hacer click en el botón */ },
                 modifier = Modifier
-                    //.background(color = Red)
                     .height(40.dp)
                     .fillMaxWidth()
                     .padding(horizontal = 5.dp),
