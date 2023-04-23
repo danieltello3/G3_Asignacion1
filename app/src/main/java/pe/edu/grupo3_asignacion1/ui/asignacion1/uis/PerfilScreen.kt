@@ -11,12 +11,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.*
 
 
-//@Preview
+@Preview
 @Composable
 public fun PerfilScreenPreview(){
-
+    PerfilScreen()
 }
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 public fun PerfilScreen(){
     Column(
@@ -29,11 +29,10 @@ public fun PerfilScreen(){
         PerfilNombre()
         PerfilButtons()
         //Archivo Gonzalo
-
+        HighlightsStories()
         //Archivo Daniel
         PerfilGrid()
     }
-
 
 
 }

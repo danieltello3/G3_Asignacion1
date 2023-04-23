@@ -22,8 +22,12 @@ import androidx.compose.ui.unit.sp
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.ui.theme.*
 
+@Preview()
 @Composable
-@Preview(showBackground = true)
+fun PerfilButtonsPreview(){
+    PerfilButtons()
+}
+@Composable
 fun PerfilButtons() {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -31,6 +35,8 @@ fun PerfilButtons() {
             .fillMaxWidth()
             .height(40.dp)
             .padding(1.dp)
+            .padding(horizontal = 10.dp, vertical = 1.dp)
+            //.background(Color.White)
     ) {
         Column(
             Modifier
@@ -49,7 +55,7 @@ fun PerfilButtons() {
             ) {
                 Text(
                     "Editar perfil",
-                    fontSize = 15.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     overflow = TextOverflow.Ellipsis,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
@@ -68,14 +74,14 @@ fun PerfilButtons() {
                     //.background(color = Red)
                     .height(40.dp)
                     .fillMaxWidth()
-                    .padding(horizontal = 10.dp),
+                    .padding(horizontal = 5.dp),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = OrangeUL
                 )
             ) {
                 Text(
                     "Compartir perfil",
-                    fontSize = 15.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     overflow = TextOverflow.Ellipsis,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,

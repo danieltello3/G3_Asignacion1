@@ -20,7 +20,7 @@ fun PerfilNombre(){
 
     Row(){
         Text(
-            modifier = Modifier.padding(bottom = 15.dp,start = 9.dp),
+            modifier = Modifier.padding(bottom = 15.dp,start = 20.dp),
             text = "Armando Mendoza",
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
