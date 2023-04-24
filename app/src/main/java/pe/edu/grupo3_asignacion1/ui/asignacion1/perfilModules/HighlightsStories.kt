@@ -1,8 +1,6 @@
 package pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
@@ -39,7 +37,7 @@ fun HighlightsStories(){
                     colorFilter = ColorFilter.tint (color = if(isSystemInDarkTheme()) Color.White else Color.Black),
                 )
                 Text("Nueva", color = if(isSystemInDarkTheme()) Color.White else Color.Black)
-            }
+            } 
         }
     }
 }
