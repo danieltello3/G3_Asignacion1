@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import pe.edu.grupo3_asignacion1.models.Photo
 import pe.edu.grupo3_asignacion1.models.PhotoList
+import pe.edu.grupo3_asignacion1.services.ImageService
 
 @Preview
 @Composable
@@ -28,7 +29,7 @@ fun PerfilGridPreview(){
 
 @Composable
 fun PerfilGrid(){
-    var tmpList: List<Photo> = PhotoList
+    var tmpList: List<Photo> = ImageService.fetchAll()
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
@@ -39,7 +40,7 @@ fun PerfilGrid(){
         items(tmpList){item ->
             Box(modifier = Modifier.size(100.dp,140.dp)){
                 Image(painter = rememberImagePainter(data=item.url),
-                    contentDescription = item.name,
+                    contentDescription = item.id.toString(),
                     contentScale = ContentScale.FillWidth)
             }
         }
