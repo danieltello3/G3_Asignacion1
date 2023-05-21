@@ -29,17 +29,20 @@ import coil.compose.rememberImagePainter
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.models.Photo
 import pe.edu.grupo3_asignacion1.services.ImageService
+import pe.edu.grupo3_asignacion1.ui.home.viewmodels.HomeScreenViewModel
 import pe.edu.grupo3_asignacion1.ui.theme.OrangeUL
 
 
 @Preview
 @Composable
 public fun HomePreview(){
-    HomeScreen()
+    HomeScreen(HomeScreenViewModel())
 }
 //@Preview(showBackground = true)
 @Composable
-public fun HomeScreen(){
+public fun HomeScreen(
+    viewModel: HomeScreenViewModel
+){
     Column(
         modifier = Modifier
             .fillMaxSize()

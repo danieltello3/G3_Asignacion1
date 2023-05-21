@@ -1,4 +1,6 @@
 package pe.edu.grupo3_asignacion1.ui.home.viewmodels
 
-class HomeScreenViewModel {
+import androidx.lifecycle.ViewModel
+
+class HomeScreenViewModel: ViewModel() {
 }

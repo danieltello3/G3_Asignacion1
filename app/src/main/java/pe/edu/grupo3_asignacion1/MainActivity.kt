@@ -10,8 +10,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.PerfilScreen
+import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.HomeScreen
 import pe.edu.grupo3_asignacion1.ui.theme.Grupo3_Asignacion1Theme
+import pe.edu.grupo3_asignacion1.ui.login.uis.LoginScreen
+import pe.edu.grupo3_asignacion1.ui.login.viewmodels.LoginViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +26,12 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
 
-                    PerfilScreen()
+                    LoginScreen(
+                        LoginViewModel(),
+                        goToResetPasswordScreen = {},
+                        goToHomeScreen = {},
+                        goToCreateAccountScreen = {}
+                    )
                 }
             }
         }

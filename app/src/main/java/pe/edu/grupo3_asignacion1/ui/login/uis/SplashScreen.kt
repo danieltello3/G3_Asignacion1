@@ -1,4 +1,4 @@
-package pe.edu.ulima.ui.login.uis
+package pe.edu.grupo3_asignacion1.ui.login.uis
 
 import android.content.Intent
 import android.os.Handler
@@ -19,10 +19,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import pe.edu.ulima.ui.theme.Gray200
-import pe.edu.ulima.ui.theme.Orange200
-import pe.edu.ulima.R
-import pe.edu.ulima.activities.AppActivity
+import pe.edu.grupo3_asignacion1.R
+import pe.edu.grupo3_asignacion1.ui.theme.*
+import pe.edu.grupo3_asignacion1.activities.AppActivity
 
 @Preview
 @Composable
@@ -34,7 +33,7 @@ public fun SplashScreenPreview(){
 
 @Composable
 public fun SplashScreen(navController: NavHostController){
-    val caslonFont = FontFamily(Font(R.font.caslon_classico_sc_regular))
+    //val caslonFont = FontFamily(Font(R.font.caslon_classico_sc_regular))
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -46,17 +45,16 @@ public fun SplashScreen(navController: NavHostController){
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             Image(
-                painter = painterResource(id = R.drawable.ic_ulima),
+                painter = painterResource(id = R.drawable.ic_ulgram_launcher_foreground),
                 contentDescription = "Logo Ulima",
                 modifier = Modifier.size(120.dp).padding(bottom = 10.dp),
                 colorFilter = ColorFilter.tint(
-                    color = if(isSystemInDarkTheme()) Orange200 else Gray200
+                    color = OrangeUL
                 )
             )
             Text(
-                text = "UNIVERSIDAD DE LIMA\n PROGRAMACIÓN MÓVIL \n 2023-I",
-                textAlign = TextAlign.Center,
-                fontFamily = caslonFont
+                text = "ULGRAM",
+                textAlign = TextAlign.Center//, fontFamily = caslonFont
             )
         }
     }

@@ -2,8 +2,11 @@ package pe.edu.grupo3_asignacion1.ui.login.uis
 
 import android.app.Activity
 import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -16,40 +19,44 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import pe.edu.grupo3_asignacion1.R
-import pe.edu.grupo3_asignacion1.ui.login.viewmodels.CreateAccountViewModel
-import pe.edu.grupo3_asignacion1.ui.theme.GrayUL
-import pe.edu.grupo3_asignacion1.ui.theme.OrangeUL
+import pe.edu.grupo3_asignacion1.ui.login.viewmodels.ResetPasswordViewModel
+import pe.edu.grupo3_asignacion1.ui.theme.*
 
 @Preview
 @Composable
-fun CreateAccountPreview(){
-    CreateAccountScreen(
-        CreateAccountViewModel(),
-        goToResetPasswordScreen = {},
-        goToHomeScreen = {}
+public fun ResetPaswordScreenPreview2(){
+    ResetPasswordScreen2(
+        ResetPasswordViewModel(),
+        goToLoginScreen = {}
     )
 }
 
 @Composable
-fun CreateAccountScreen(
-    viewModel: CreateAccountViewModel,
-    goToResetPasswordScreen: () -> Unit,
-    goToHomeScreen: () -> Unit
+public fun ResetPasswordScreen2(
+    viewModel: ResetPasswordViewModel,
+    goToLoginScreen: () -> Unit
 ){
-    val context = LocalContext.current as Activity
+
+    //val context = LocalContext.current as Activity
     // viewmodel
     val correo : String by viewModel.correo.observeAsState(initial = "")
     val mensaje : String by viewModel.mensaje.observeAsState(initial = "")
+
     // close
+
+
     Box(modifier = Modifier.fillMaxSize()) {
         IconButton(
-            onClick = {
+            onClick = {/*
                 Log.d("LOGIN_SCREEN", "XDDDDDDDDDDDDDDDDDDD")
-                context.finish()
+                context.finish()*/
             },
             modifier = Modifier.align(Alignment.TopEnd).padding(10.dp)
         ){
@@ -59,6 +66,7 @@ fun CreateAccountScreen(
             )
         }
     }
+
     // container
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -71,7 +79,7 @@ fun CreateAccountScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_ulima),
+                painter = painterResource(id = R.drawable.ic_ulgram_launcher_foreground),
                 contentDescription = "Logo Ulima",
                 modifier = Modifier
                     .size(120.dp)
@@ -83,7 +91,9 @@ fun CreateAccountScreen(
             Text(
                 text = "Restablecer Contraseña",
                 textAlign = TextAlign.Center,
+                fontSize = 20.sp
             )
+
             if (mensaje.contains("Error")) {
                 Text(
                     text = mensaje.split(":")[1],
@@ -97,34 +107,37 @@ fun CreateAccountScreen(
                     color = Color.Green
                 )
             }
+
             // txtCorreo
             TextField(
                 value = correo,
                 onValueChange = {
-                    viewModel.updateCorreo(it)
+                     viewModel.updateCorreo(it)
                 },
                 modifier = Modifier.fillMaxWidth(),
                 label = {
                     Text(text = "Correo")
                 },
                 placeholder = {
-                    Text(text = "")
+                    Text(text= "")
                 },
                 singleLine = true,
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.Transparent
                 )
             )
+
             // boton reset
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
                 onClick = {
-
-                }
+                    viewModel.reset()
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = OrangeUL)
             ) {
-                Text("Enviar Correo")
+                Text("Recuperar".uppercase())
             }
             Divider(
                 modifier = Modifier
@@ -132,19 +145,31 @@ fun CreateAccountScreen(
                     .padding(top = 10.dp, bottom = 10.dp),
                 thickness = 2.dp,
             )
+
+            //Ingresar al sistema
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                    .padding(top = 5.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
                 onClick = {
-
+                    /*goToLoginScreen()*/
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = GrayUL)
             ) {
-                Text("Ir a Ingresar".uppercase())
+                Text("Ingresar al sistema".uppercase())
+            }
+
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 5.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                onClick = {
+                    /*goToLoginScreen()*/
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = GrayUL)
+            ) {
+                Text("Crear cuenta".uppercase())
             }
         }
     }
-
-
 }

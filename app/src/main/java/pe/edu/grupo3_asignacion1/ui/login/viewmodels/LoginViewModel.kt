@@ -1,4 +1,4 @@
-package pe.edu.ulima.ui.login.viewmodels
+package pe.edu.grupo3_asignacion1.ui.login.viewmodels
 
 import android.app.Activity
 import android.content.Context
@@ -7,22 +7,26 @@ import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import pe.edu.ulima.activities.AppActivity
-import pe.edu.ulima.services.UserService
+import pe.edu.grupo3_asignacion1.activities.AppActivity
+import pe.edu.grupo3_asignacion1.services.UserService
 
 class LoginViewModel: ViewModel() {
-    private val _usuario = MutableLiveData<String>("")
+
+    //USUARIO
+    private val _usuario = MutableLiveData("")
     var usuario: LiveData<String> = _usuario
     fun updateUsuario(it: String){
         _usuario.postValue(it)
     }
 
+    //CONTRASEÑA
     private val _contrasenia = MutableLiveData<String>("")
     var contrasenia: LiveData<String> = _contrasenia
     fun updateContrasenia(it: String){
         _contrasenia.postValue(it)
     }
 
+    //MENSAJE DE ERROR
     private val _mensaje = MutableLiveData<String>("")
     var mensaje: LiveData<String> = _mensaje
     fun updateMensaje(it: String){

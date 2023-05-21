@@ -1,4 +1,4 @@
-package pe.edu.ulima.ui.login.viewmodels
+package pe.edu.grupo3_asignacion1.ui.login.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class ResetPasswordScreenViewModel: ViewModel() {
+class ResetPasswordViewModel:ViewModel(){
     private val _correo = MutableLiveData<String>("")
     var correo: LiveData<String> = _correo
     fun updateCorreo(it: String){

@@ -1,4 +1,4 @@
-package pe.edu.ulima.ui.login.uis
+package pe.edu.grupo3_asignacion1.ui.login.uis
 
 import android.app.Activity
 import android.util.Log
@@ -24,37 +24,35 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import pe.edu.ulima.R
-import pe.edu.ulima.ui.login.viewmodels.ResetPasswordScreenViewModel
-import pe.edu.ulima.ui.theme.Gray200
-import pe.edu.ulima.ui.theme.Gray400
-import pe.edu.ulima.ui.theme.Green200
-import pe.edu.ulima.ui.theme.Orange200
+import pe.edu.grupo3_asignacion1.R
+import pe.edu.grupo3_asignacion1.ui.login.viewmodels.ResetPasswordViewModel
+import pe.edu.grupo3_asignacion1.ui.theme.*
 
 @Preview
 @Composable
 public fun ResetPaswordScreenPreview(){
     ResetPasswordScreen(
-        ResetPasswordScreenViewModel(),
+        ResetPasswordViewModel(),
         goToLoginScreen = {}
     )
 }
 
 @Composable
 public fun ResetPasswordScreen(
-    viewModel: ResetPasswordScreenViewModel,
+    viewModel: ResetPasswordViewModel,
     goToLoginScreen: () -> Unit
 ){
-    val context = LocalContext.current as Activity
+    //val context = LocalContext.current as Activity
     // viewmodel
     val correo : String by viewModel.correo.observeAsState(initial = "")
     val mensaje : String by viewModel.mensaje.observeAsState(initial = "")
     // close
+
     Box(modifier = Modifier.fillMaxSize()) {
         IconButton(
-            onClick = {
+            onClick = {/*
                 Log.d("LOGIN_SCREEN", "XDDDDDDDDDDDDDDDDDDD")
-                context.finish()
+                context.finish()*/
             },
             modifier = Modifier.align(Alignment.TopEnd).padding(10.dp)
         ){
@@ -76,13 +74,13 @@ public fun ResetPasswordScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_ulima),
+                painter = painterResource(id = R.drawable.ic_ulgram_launcher_foreground),
                 contentDescription = "Logo Ulima",
                 modifier = Modifier
                     .size(120.dp)
                     .padding(bottom = 10.dp),
                 colorFilter = ColorFilter.tint(
-                    color = if (isSystemInDarkTheme()) Orange200 else Gray200
+                    color = OrangeUL
                 )
             )
             Text(
@@ -144,7 +142,7 @@ public fun ResetPasswordScreen(
                 onClick = {
                     goToLoginScreen()
                 },
-                colors = ButtonDefaults.buttonColors(backgroundColor = Gray400)
+                colors = ButtonDefaults.buttonColors(backgroundColor = GrayUL)
             ) {
                 Text("Ir a Ingresar".toUpperCase())
             }

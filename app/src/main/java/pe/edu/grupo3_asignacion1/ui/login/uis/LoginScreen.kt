@@ -1,10 +1,9 @@
-package pe.edu.ulima.ui.login.uis
+package pe.edu.grupo3_asignacion1.ui.login.uis
 
 import android.app.Activity
 import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -23,26 +22,29 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import pe.edu.ulima.R
-import pe.edu.ulima.ui.login.viewmodels.LoginViewModel
-import pe.edu.ulima.ui.theme.Gray200
-import pe.edu.ulima.ui.theme.Gray400
-import pe.edu.ulima.ui.theme.Green200
-import pe.edu.ulima.ui.theme.Orange200
+import androidx.compose.ui.unit.sp
+import pe.edu.grupo3_asignacion1.R
+import pe.edu.grupo3_asignacion1.ui.login.viewmodels.LoginViewModel
+import pe.edu.grupo3_asignacion1.ui.theme.*
+
 
 @Preview
 @Composable
 public fun LoginScreenPreview(){
     LoginScreen(
         LoginViewModel(),
-        goToResetPasswordScreen = {}
+        goToResetPasswordScreen = {},
+        goToHomeScreen = {},
+        goToCreateAccountScreen = {}
     )
 }
 
 @Composable
 public fun LoginScreen(
     viewModel: LoginViewModel,
-    goToResetPasswordScreen: () -> Unit
+    goToResetPasswordScreen: () -> Unit,
+    goToHomeScreen: () -> Unit,
+    goToCreateAccountScreen: () -> Unit
 ){
     val context = LocalContext.current
     // viewmodel
@@ -77,18 +79,19 @@ public fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             Image(
-                painter = painterResource(id = R.drawable.ic_ulima),
+                painter = painterResource(id = R.drawable.ic_ulgram_launcher_foreground),
                 contentDescription = "Logo Ulima",
                 modifier = Modifier
-                    .size(120.dp)
-                    .padding(bottom = 10.dp),
+                    .size(250.dp),
+                    //.padding(bottom = 5.dp),
                 colorFilter = ColorFilter.tint(
-                    color = if(isSystemInDarkTheme()) Orange200 else Gray200
+                    color = OrangeUL
                 )
             )
             Text(
-                text = "Bienvenido",
+                text = "Acceder al sistema",
                 textAlign = TextAlign.Center,
+                fontSize = 20.sp
             )
             if(mensaje.contains("Error")){
                 Text(
@@ -148,10 +151,12 @@ public fun LoginScreen(
                     .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
                 onClick = {
                     viewModel.validar(context)
-                }
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = OrangeUL)
             ){
                 Text("INGRESAR")
             }
+
             // boton Ingresar con Google
             Button(
                 modifier = Modifier
@@ -161,7 +166,7 @@ public fun LoginScreen(
 
                 },
                 //colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF4CAF50)) ,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Green200)
+                colors = ButtonDefaults.buttonColors(backgroundColor = GreenUL)
             ){
                 Image(
                     painter = painterResource(id = R.drawable.ic_google),
@@ -182,20 +187,32 @@ public fun LoginScreen(
                     .padding(top = 10.dp, bottom = 10.dp),
                 thickness = 2.dp,
             )
+
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                    .padding(top = 10.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                onClick = {
+                    goToCreateAccountScreen()
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = GrayUL)
+            ){
+                Text("Crear Cuenta".uppercase())
+            }
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 1.dp, /*start = 40.dp, end = 40.dp*/),
                 onClick = {
                     goToResetPasswordScreen()
                 },
-                colors = ButtonDefaults.buttonColors(backgroundColor = Gray400)
+                colors = ButtonDefaults.buttonColors(backgroundColor = GrayUL)
             ){
-                Text("Crear Cuenta".toUpperCase())
+                Text("Recuperar contraseña".uppercase())
             }
 
             BackHandler {
-                Log.d("LoginScreen", "XDDDDDDDDDDDDDDDDDDDDDDDdd")
+                Log.d("LoginScreen", "XD")
                 val activity = context as Activity
                 activity.finish()
             }
