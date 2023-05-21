@@ -25,6 +25,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.ui.login.viewmodels.ResetPasswordViewModel
 import pe.edu.grupo3_asignacion1.ui.theme.*
@@ -33,6 +35,7 @@ import pe.edu.grupo3_asignacion1.ui.theme.*
 @Composable
 public fun ResetPaswordScreenPreview(){
     ResetPasswordScreen(
+        rememberNavController(),
         ResetPasswordViewModel(),
         goToLoginScreen = {}
     )
@@ -40,6 +43,7 @@ public fun ResetPaswordScreenPreview(){
 
 @Composable
 public fun ResetPasswordScreen(
+    navController: NavHostController,
     viewModel: ResetPasswordViewModel,
     goToLoginScreen: () -> Unit
 ){
@@ -54,7 +58,9 @@ public fun ResetPasswordScreen(
             onClick = {
                 context.finish()
             },
-            modifier = Modifier.align(Alignment.TopEnd).padding(10.dp)
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(10.dp)
         ){
             Icon(
                 imageVector = Icons.Default.Close,
@@ -130,9 +136,7 @@ public fun ResetPasswordScreen(
                     .fillMaxWidth()
                     .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
                 onClick = {
-                    if(viewModel.reset(context)){
-                        goToLoginScreen
-                    }
+                    viewModel.reset(context,navController)
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = OrangeUL)
             ) {
