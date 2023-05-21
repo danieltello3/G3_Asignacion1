@@ -1,6 +1,7 @@
 package pe.edu.grupo3_asignacion1.ui.asignacion1.uis
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -52,8 +53,7 @@ fun FollowScreen(
                 .fillMaxWidth()
                 .background(if (isSystemInDarkTheme()) Color.Black else Color.White))
         {
-            var tabIndex by remember { mutableStateOf(tabViewModel.index.value!!)}
-
+            var tabIndex by remember(tabViewModel.index!!) { mutableStateOf(tabViewModel.index!!)}
             val tabs = listOf("seguidores", "seguidos")
 
             Column(modifier = Modifier.fillMaxWidth()) {
@@ -61,7 +61,9 @@ fun FollowScreen(
                     tabs.forEachIndexed { index, title ->
                         Tab(text = { Text(title) },
                             selected = tabIndex == index,
-                            onClick = { tabIndex = index }
+                            onClick = {
+                                tabIndex = index
+                            }
                         )
                     }
                 }

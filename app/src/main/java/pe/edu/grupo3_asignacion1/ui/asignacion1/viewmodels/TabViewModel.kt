@@ -6,9 +6,10 @@ import androidx.lifecycle.ViewModel
 
 class TabViewModel: ViewModel() {
     private val _index = MutableLiveData(0)
-    var index: LiveData<Int> = _index
+    val index get() = _index.value
 
     fun updateIndex(it: Int) {
         _index.postValue(it)
     }
+
 }

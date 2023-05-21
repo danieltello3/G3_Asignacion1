@@ -31,7 +31,6 @@ fun PerfilFirstRow(
     navController: NavController
 ) {
     val userId = 1
-    var indexId = 0
 
     Column() {
         Row(
@@ -84,7 +83,7 @@ fun PerfilFirstRow(
                 .weight(1f)
                 .align(Alignment.CenterVertically)
                 .clickable {
-                    indexId = 1
+                    var indexId = 0
                 navController.navigate("/profile/follows/${userId}/${indexId}")
             }) {
                 Text(
@@ -104,6 +103,7 @@ fun PerfilFirstRow(
                 .weight(1f)
                 .align(Alignment.CenterVertically)
                 .clickable {
+                    var indexId = 1
                     navController.navigate("/profile/follows/${userId}/${indexId}")
                 }) {
                 Text(
