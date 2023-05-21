@@ -34,7 +34,6 @@ public fun LoginScreenPreview(){
     LoginScreen(
         LoginViewModel(),
         goToResetPasswordScreen = {},
-        goToHomeScreen = {},
         goToCreateAccountScreen = {}
     )
 }
@@ -43,7 +42,6 @@ public fun LoginScreenPreview(){
 public fun LoginScreen(
     viewModel: LoginViewModel,
     goToResetPasswordScreen: () -> Unit,
-    goToHomeScreen: () -> Unit,
     goToCreateAccountScreen: () -> Unit
 ){
     val context = LocalContext.current
@@ -93,6 +91,8 @@ public fun LoginScreen(
                 textAlign = TextAlign.Center,
                 fontSize = 20.sp
             )
+
+            //Cambiar de color del mensaje
             if(mensaje.contains("Error")){
                 Text(
                     text = mensaje.split(":")[1],
@@ -106,7 +106,7 @@ public fun LoginScreen(
                     color = Color.Green
                 )
             }
-            // txtUser
+            // TextField de Usuario
             TextField(
                 value = usuario,
                 onValueChange = {

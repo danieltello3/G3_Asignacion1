@@ -24,6 +24,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.ui.login.viewmodels.ResetPasswordViewModel
 import pe.edu.grupo3_asignacion1.ui.theme.*
@@ -42,11 +43,14 @@ public fun ResetPasswordScreen(
     viewModel: ResetPasswordViewModel,
     goToLoginScreen: () -> Unit
 ){
-    //val context = LocalContext.current as Activity
+
+    val context = LocalContext.current as Activity
     // viewmodel
     val correo : String by viewModel.correo.observeAsState(initial = "")
     val mensaje : String by viewModel.mensaje.observeAsState(initial = "")
+
     // close
+
 
     Box(modifier = Modifier.fillMaxSize()) {
         IconButton(
@@ -62,6 +66,7 @@ public fun ResetPasswordScreen(
             )
         }
     }
+
     // container
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -86,7 +91,10 @@ public fun ResetPasswordScreen(
             Text(
                 text = "Restablecer Contraseña",
                 textAlign = TextAlign.Center,
+                fontSize = 20.sp
             )
+
+            //Cambia color al mensaje
             if (mensaje.contains("Error")) {
                 Text(
                     text = mensaje.split(":")[1],
@@ -100,6 +108,7 @@ public fun ResetPasswordScreen(
                     color = Color.Green
                 )
             }
+
             // txtCorreo
             TextField(
                 value = correo,
@@ -111,23 +120,25 @@ public fun ResetPasswordScreen(
                     Text(text = "Correo")
                 },
                 placeholder = {
-                    Text(text = "")
+                    Text(text= "")
                 },
                 singleLine = true,
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.Transparent
                 )
             )
+
             // boton reset
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
                 onClick = {
-                    viewModel.reset()
-                }
+                    viewModel.reset(context)
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = OrangeUL)
             ) {
-                Text("Enviar Correo")
+                Text("Recuperar".uppercase())
             }
             Divider(
                 modifier = Modifier
@@ -135,16 +146,30 @@ public fun ResetPasswordScreen(
                     .padding(top = 10.dp, bottom = 10.dp),
                 thickness = 2.dp,
             )
+
+            //Ingresar al sistema
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                    .padding(top = 5.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
                 onClick = {
-                    goToLoginScreen()
+                    /*goToLoginScreen()*/
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = GrayUL)
             ) {
-                Text("Ir a Ingresar".toUpperCase())
+                Text("Ingresar al sistema".uppercase())
+            }
+
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 5.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                onClick = {
+                    /*goToLoginScreen()*/
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = GrayUL)
+            ) {
+                Text("Crear cuenta".uppercase())
             }
         }
     }

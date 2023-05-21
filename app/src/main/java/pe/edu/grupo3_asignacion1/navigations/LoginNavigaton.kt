@@ -47,19 +47,11 @@ fun LoginNavigation(
                 }
             )
         ){ entry ->
-            /*
-            Log.d("pe.edu.grupo3_asignacion1", "1 +++++++++++++++++++++++++++++++++++++++++++")
-            Log.d("pe.edu.grupo3_asignacion1", parameter.toString())
-            Log.d("pe.edu.grupo3_asignacion1", optionalParameter.toString())
-            Log.d("pe.edu.grupo3_asignacion1", "2 +++++++++++++++++++++++++++++++++++++++++++")*/
             if(parameter == null || parameter == ""){
                 LoginScreen(
                     loginScreenViewModel,
                     goToResetPasswordScreen = {
                         navController.navigate("/reset_password")
-                    },
-                    goToHomeScreen = {
-                        navController.navigate("/home")
                     },
                     goToCreateAccountScreen = {
                         navController.navigate("/create_account")
@@ -71,9 +63,6 @@ fun LoginNavigation(
                     loginScreenViewModel,
                     goToResetPasswordScreen = {
                         navController.navigate("/reset_password")
-                    },
-                    goToHomeScreen = {
-                        navController.navigate("/home")
                     },
                     goToCreateAccountScreen = {
                         navController.navigate("/create_account")
@@ -91,9 +80,6 @@ fun LoginNavigation(
                 loginScreenViewModel,
                 goToResetPasswordScreen = {
                     navController.navigate("/reset_password")
-                },
-                goToHomeScreen = {
-                    navController.navigate("/home")
                 },
                 goToCreateAccountScreen = {
                     navController.navigate("/create_account")
@@ -139,7 +125,7 @@ fun LoginNavigation(
                 goToResetPasswordScreen = {
                     navController.navigate("/reset_password")
                 },
-                goToHomeScreen = {
+                goToLoginScreen = {
                     navController.navigate("/home_screen")
                 }
             )
