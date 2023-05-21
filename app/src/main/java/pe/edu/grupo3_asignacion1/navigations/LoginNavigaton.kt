@@ -104,6 +104,7 @@ fun LoginNavigation(
             arguments = listOf()
         ){ entry ->
             ResetPasswordScreen(
+                navController,
                 resetPasswordScreenViewModel,
                 goToLoginScreen = {
                     /*
