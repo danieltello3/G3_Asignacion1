@@ -17,13 +17,15 @@ import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.*
 @Composable
 fun PerfilScreenPreview(){
     PerfilScreen(
-        rememberNavController()
+        rememberNavController(),
+    1
     )
 }
 //@Preview(showBackground = true)
 @Composable
 fun PerfilScreen(
-    navController: NavController
+    navController: NavController,
+    userId: Int
 ){
     Column(
         modifier = Modifier
@@ -31,13 +33,15 @@ fun PerfilScreen(
             .background(if (isSystemInDarkTheme()) Color.Black else Color.White))
     {
         //Archivo Brillitt
-        PerfilFirstRow(navController = navController)
-        PerfilNombre()
+        PerfilFirstRow(navController = navController, userId = userId)
+        PerfilNombre(userId)
         PerfilButtons()
         //Archivo Gonzalo
         HighlightsStories()
         //Archivo Daniel
-        PerfilGrid()
+        PerfilGrid(
+            userId
+        )
     }
 
 

@@ -24,13 +24,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import pe.edu.grupo3_asignacion1.R
+import pe.edu.grupo3_asignacion1.models.Photo
+import pe.edu.grupo3_asignacion1.models.User
+import pe.edu.grupo3_asignacion1.services.FollowerService
+import pe.edu.grupo3_asignacion1.services.ImageService
+import pe.edu.grupo3_asignacion1.services.UserService
 import pe.edu.grupo3_asignacion1.ui.theme.*
 
 @Composable
 fun PerfilFirstRow(
-    navController: NavController
+    navController: NavController,
+    userId: Int
 ) {
-    val userId = 1
+    val user: User = UserService.fetchOne(userId)
+    val seguidos: Int = FollowerService.countFollowingsBySeId(userId)
+    val seguidores: Int = FollowerService.countFollowersByUserId(userId)
+    var posts:Int = ImageService.fetchByUserId(user.id).size
 
     Column() {
         Row(
@@ -63,7 +72,7 @@ fun PerfilFirstRow(
                 .align(Alignment.CenterVertically)
                 .weight(1f)) {
                 Text(
-                    text = "100", fontSize = 24.sp, fontWeight = FontWeight.Bold,
+                    text = posts.toString(), fontSize = 24.sp, fontWeight = FontWeight.Bold,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis
@@ -84,10 +93,10 @@ fun PerfilFirstRow(
                 .align(Alignment.CenterVertically)
                 .clickable {
                     var indexId = 0
-                navController.navigate("/profile/follows/${userId}/${indexId}")
+                navController.navigate("/profile/follows/${user.id}/${indexId}")
             }) {
                 Text(
-                    text = "536", fontSize = 24.sp, fontWeight = FontWeight.Bold,
+                    text = seguidores.toString(), fontSize = 24.sp, fontWeight = FontWeight.Bold,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis
@@ -104,10 +113,10 @@ fun PerfilFirstRow(
                 .align(Alignment.CenterVertically)
                 .clickable {
                     var indexId = 1
-                    navController.navigate("/profile/follows/${userId}/${indexId}")
+                    navController.navigate("/profile/follows/${user.id}/${indexId}")
                 }) {
                 Text(
-                    text = "536", fontSize = 24.sp, fontWeight = FontWeight.Bold,
+                    text = seguidos.toString(), fontSize = 24.sp, fontWeight = FontWeight.Bold,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis

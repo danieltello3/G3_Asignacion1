@@ -27,12 +27,29 @@ fun AppNavigation(
     ){
         // vista para mostrar el listado de pokemones
         composable(
+            route = "/profile/?user_id={user_id}",
+            arguments = listOf(
+                navArgument("user_id") {
+                    type = NavType.IntType
+                    defaultValue = 0
+                }
+            )
+        ){
+            PerfilScreen(
+                navController,
+                userId!!
+            )
+        }
+
+        composable(
             route = "/profile/",
         ){
             PerfilScreen(
                 navController,
+                1
             )
         }
+
         // vista follows
         composable(
             route = "/profile/follows/{user_id}/{index_id}",

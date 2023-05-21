@@ -68,8 +68,8 @@ fun FollowScreen(
                     }
                 }
                 when (tabIndex) {
-                    0 -> FollowerScreen(viewModel = viewModel)
-                    1 -> FollowingScreen(viewModel = viewModel)
+                    0 -> FollowerScreen(viewModel = viewModel, navController)
+                    1 -> FollowingScreen(viewModel = viewModel, navController)
                 }
             }
         }

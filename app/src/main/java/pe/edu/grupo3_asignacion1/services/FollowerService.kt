@@ -54,7 +54,7 @@ class FollowerService {
             )
         }
 
-        fun countFollowingsByUserId(userId: Int): Int{
+        fun countFollowersByUserId(userId: Int): Int{
             var respuesta : Int = 0
             val list: List<Follows> = fetchAll()
             for(following in list){
@@ -65,7 +65,7 @@ class FollowerService {
             return respuesta
         }
 
-        fun countFollowersBySeId(userId: Int): Int{
+        fun countFollowingsBySeId(userId: Int): Int{
             var respuesta : Int = 0
             val list: List<Follows> = fetchAll()
             for(follower in list){
