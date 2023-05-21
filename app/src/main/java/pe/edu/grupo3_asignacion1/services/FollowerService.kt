@@ -78,7 +78,7 @@ class FollowerService {
 
         fun fetchFollowers(userId: Int): List<User>{
             val respuesta : MutableList<User> = arrayListOf()
-            val list: List<Follows> = fetchAll()
+            val list: List<Follows> = FollowerService.fetchAll()
             for(follower in list){
                 if(follower.usuarioId == userId){
                     val seguidor: User = UserService.fetchOne(follower.seguidorId)
@@ -89,7 +89,7 @@ class FollowerService {
         }
         fun fetchFollowings(userId: Int): List<User>{
             val respuesta : MutableList<User> = arrayListOf()
-            val list: List<Follows> = fetchAll()
+            val list: List<Follows> = FollowerService.fetchAll()
             for(following in list){
                 if(following.seguidorId == userId){
                     val seguidor: User = UserService.fetchOne(following.usuarioId)

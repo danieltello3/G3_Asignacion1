@@ -1,4 +1,4 @@
-package pe.edu.grupo3_asignacion1.ui.theme
+package pe.edu.grupo3_asignacion1.activities.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

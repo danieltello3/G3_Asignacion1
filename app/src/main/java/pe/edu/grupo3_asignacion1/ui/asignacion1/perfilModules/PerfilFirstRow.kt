@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,12 +22,17 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.ui.theme.*
 
 @Composable
-@Preview(showBackground = true)
-fun PerfilFirstRow() {
+fun PerfilFirstRow(
+    navController: NavController
+) {
+    val userId = 1
+    var indexId = 0
+
     Column() {
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
@@ -76,7 +82,11 @@ fun PerfilFirstRow() {
             }
             Column(modifier = Modifier
                 .weight(1f)
-                .align(Alignment.CenterVertically)) {
+                .align(Alignment.CenterVertically)
+                .clickable {
+                    indexId = 1
+                navController.navigate("/profile/follows/${userId}/${indexId}")
+            }) {
                 Text(
                     text = "536", fontSize = 24.sp, fontWeight = FontWeight.Bold,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
@@ -92,7 +102,10 @@ fun PerfilFirstRow() {
             }
             Column(modifier = Modifier
                 .weight(1f)
-                .align(Alignment.CenterVertically)) {
+                .align(Alignment.CenterVertically)
+                .clickable {
+                    navController.navigate("/profile/follows/${userId}/${indexId}")
+                }) {
                 Text(
                     text = "536", fontSize = 24.sp, fontWeight = FontWeight.Bold,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,

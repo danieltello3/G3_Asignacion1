@@ -8,24 +8,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.*
 
 
 @Preview
 @Composable
-public fun PerfilScreenPreview(){
-    PerfilScreen()
+fun PerfilScreenPreview(){
+    PerfilScreen(
+        rememberNavController()
+    )
 }
 //@Preview(showBackground = true)
 @Composable
-public fun PerfilScreen(){
+fun PerfilScreen(
+    navController: NavController
+){
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(if (isSystemInDarkTheme()) Color.Black else Color.White))
     {
         //Archivo Brillitt
-        PerfilFirstRow()
+        PerfilFirstRow(navController = navController)
         PerfilNombre()
         PerfilButtons()
         //Archivo Gonzalo
