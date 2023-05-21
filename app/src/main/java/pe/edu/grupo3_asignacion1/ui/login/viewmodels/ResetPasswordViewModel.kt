@@ -24,7 +24,8 @@ class ResetPasswordViewModel:ViewModel(){
         _mensaje.postValue(it)
     }
 
-    fun reset(context: Context){
+    fun reset(context: Context):Boolean{
+        var flag = false
         //Validar si el campo está lleno o vacío
         if(correo.value!! != ""){
             val pattern: Pattern = Pattern.compile(".+@.+\\.[a-z]+")
@@ -38,7 +39,7 @@ class ResetPasswordViewModel:ViewModel(){
                 if(bool){
                     updateMensaje("Todo OK.")
                     //Aquí regresa a la Activity de Login
-
+                    flag = true
                 }
             }else{
                 updateMensaje("Error: Ingrese un correo válido")
@@ -46,6 +47,6 @@ class ResetPasswordViewModel:ViewModel(){
         }else{
             updateMensaje("Complete el campo de Correo.")
         }
-
+        return flag
     }
 }

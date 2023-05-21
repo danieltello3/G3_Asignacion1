@@ -45,18 +45,14 @@ public fun ResetPasswordScreen(
 ){
 
     val context = LocalContext.current as Activity
-    // viewmodel
+    // Variables para el viewmodel
     val correo : String by viewModel.correo.observeAsState(initial = "")
     val mensaje : String by viewModel.mensaje.observeAsState(initial = "")
 
-    // close
-
-
     Box(modifier = Modifier.fillMaxSize()) {
         IconButton(
-            onClick = {/*
-                Log.d("LOGIN_SCREEN", "XDDDDDDDDDDDDDDDDDDD")
-                context.finish()*/
+            onClick = {
+                context.finish()
             },
             modifier = Modifier.align(Alignment.TopEnd).padding(10.dp)
         ){
@@ -67,7 +63,7 @@ public fun ResetPasswordScreen(
         }
     }
 
-    // container
+    //Container
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.CenterStart,
@@ -134,7 +130,9 @@ public fun ResetPasswordScreen(
                     .fillMaxWidth()
                     .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
                 onClick = {
-                    viewModel.reset(context)
+                    if(viewModel.reset(context)){
+                        goToLoginScreen
+                    }
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = OrangeUL)
             ) {

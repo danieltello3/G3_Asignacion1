@@ -68,7 +68,16 @@ class CreateAccountViewModel : ViewModel(){
                         }else{
                             //Todo bien, todo correcto
                             updateMensaje("Todo OK")
-
+                            val id = UserService.create(usuario.value!!,contrasenia.value!!,correo.value!!)
+                            //Ingresar lógica de ir a la página de Home
+                            Handler().postDelayed({
+                                updateMensaje("")
+                                val appActivity =  Intent(context, AppActivity::class.java)
+                                appActivity.putExtra("user_id", id)
+                                context.startActivity(
+                                    appActivity
+                                )
+                            }, 1000)
                         }
                     }
                 }else{

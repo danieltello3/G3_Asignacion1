@@ -28,11 +28,13 @@ class UserService {
             return id
         }
 
-        fun create(usuario: String, contrasenia: String,correo: String){
-            var listSize = users.size
-            var imagen = "https://pokefanaticos.com/pokedex/assets/images/pokemon_imagenes/"+(listSize-1)+".png"
-            var user = User(listSize+1,usuario,contrasenia,usuario,correo,imagen)
+        fun create(usuario: String, contrasenia: String,correo: String): Int{
+            val listSize = users.size
+            val imagen = "https://pokefanaticos.com/pokedex/assets/images/pokemon_imagenes/"+(listSize-1)+".png"
+            val user = User(listSize+1,usuario,contrasenia,usuario,correo,imagen)
             users.add(listSize,user)
+            return listSize
+
         }
 
         fun fetchOne(id: Int): User{
