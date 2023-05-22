@@ -54,7 +54,7 @@ class FollowerService {
             )
         }
 
-        fun countFollowingsByUserId(userId: Int): Int{
+        fun countFollowersByUserId(userId: Int): Int{
             var respuesta : Int = 0
             val list: List<Follows> = fetchAll()
             for(following in list){
@@ -65,7 +65,7 @@ class FollowerService {
             return respuesta
         }
 
-        fun countFollowersBySeId(userId: Int): Int{
+        fun countFollowingsBySeId(userId: Int): Int{
             var respuesta : Int = 0
             val list: List<Follows> = fetchAll()
             for(follower in list){
@@ -78,7 +78,7 @@ class FollowerService {
 
         fun fetchFollowers(userId: Int): List<User>{
             val respuesta : MutableList<User> = arrayListOf()
-            val list: List<Follows> = fetchAll()
+            val list: List<Follows> = FollowerService.fetchAll()
             for(follower in list){
                 if(follower.usuarioId == userId){
                     val seguidor: User = UserService.fetchOne(follower.seguidorId)
@@ -89,7 +89,7 @@ class FollowerService {
         }
         fun fetchFollowings(userId: Int): List<User>{
             val respuesta : MutableList<User> = arrayListOf()
-            val list: List<Follows> = fetchAll()
+            val list: List<Follows> = FollowerService.fetchAll()
             for(following in list){
                 if(following.seguidorId == userId){
                     val seguidor: User = UserService.fetchOne(following.usuarioId)
