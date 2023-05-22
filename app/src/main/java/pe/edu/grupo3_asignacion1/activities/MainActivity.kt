@@ -10,6 +10,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.navigations.LoginNavigation
 import pe.edu.grupo3_asignacion1.ui.login.uis.SplashScreen
 import pe.edu.grupo3_asignacion1.ui.login.viewmodels.LoginViewModel
@@ -27,12 +28,13 @@ class MainActivity: ComponentActivity() {
 
         // screen navigation
         setContent {
+            val navController = rememberNavController()
             // A surface container using the 'background' color from the theme
             Surface(
                 modifier = Modifier.fillMaxSize(),
                 //color = MaterialTheme.colors.background
             ) {
-                //SplashScreen()
+                SplashScreen(navController)
                 LoginNavigation(
                     loginScreenViewModel = loginViewModel,
                     resetPasswordScreenViewModel = resetPasswordViewModel,

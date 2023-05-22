@@ -1,10 +1,7 @@
 package pe.edu.grupo3_asignacion1.ui.login.uis
 
 import android.app.Activity
-import android.util.Log
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -19,8 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,17 +30,17 @@ import pe.edu.grupo3_asignacion1.ui.theme.*
 @Composable
 public fun ResetPaswordScreenPreview(){
     ResetPasswordScreen(
-        rememberNavController(),
         ResetPasswordViewModel(),
-        goToLoginScreen = {}
+        goToLoginScreen = {},
+        goToCreateAccountScreen = {}
     )
 }
 
 @Composable
 public fun ResetPasswordScreen(
-    navController: NavHostController,
     viewModel: ResetPasswordViewModel,
-    goToLoginScreen: () -> Unit
+    goToLoginScreen: () -> Unit,
+    goToCreateAccountScreen: () -> Unit
 ){
 
     val context = LocalContext.current as Activity
@@ -136,7 +131,10 @@ public fun ResetPasswordScreen(
                     .fillMaxWidth()
                     .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
                 onClick = {
-                    viewModel.reset(context,navController)
+                    if(viewModel.reset(context)){
+                        goToLoginScreen()
+                    }
+
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = OrangeUL)
             ) {
@@ -155,7 +153,7 @@ public fun ResetPasswordScreen(
                     .fillMaxWidth()
                     .padding(top = 5.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
                 onClick = {
-                    /*goToLoginScreen()*/
+                    goToLoginScreen()
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = GrayUL)
             ) {
@@ -165,9 +163,9 @@ public fun ResetPasswordScreen(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 5.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                    .padding(top = 5.dp),
                 onClick = {
-                    /*goToLoginScreen()*/
+                    goToCreateAccountScreen()
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = GrayUL)
             ) {

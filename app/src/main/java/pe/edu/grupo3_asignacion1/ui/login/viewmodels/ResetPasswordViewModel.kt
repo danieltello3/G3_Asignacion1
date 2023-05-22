@@ -1,12 +1,16 @@
 package pe.edu.grupo3_asignacion1.ui.login.viewmodels
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
+import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.activities.AppActivity
 import pe.edu.grupo3_asignacion1.services.UserService
 import java.util.regex.Matcher
@@ -25,7 +29,8 @@ class ResetPasswordViewModel:ViewModel(){
         _mensaje.postValue(it)
     }
 
-    fun reset(context: Context, navController: NavHostController){
+    fun reset(context: Context): Boolean{
+        var flag = false
         //Validar si el campo está lleno o vacío
         if(correo.value!! != ""){
             val pattern: Pattern = Pattern.compile(".+@.+\\.[a-z]+")
@@ -38,16 +43,21 @@ class ResetPasswordViewModel:ViewModel(){
                 val bool = UserService.verifyIfEmailAlreadyExists(correo.value!!)
                 if(bool){
                     updateMensaje("Todo OK.")
+                    flag = true
                     //Aquí regresa a la Activity de Login
-                    Handler().postDelayed({
+
+                    /*Handler().postDelayed({
                         navController.navigate("/login/")
                     }, 1500)
+
+                     */
                 }
             }else{
                 updateMensaje("Error: Ingrese un correo válido")
             }
         }else{
-            updateMensaje("Complete el campo de Correo.")
+            updateMensaje("Error: Complete el campo de Correo.")
         }
+        return flag
     }
 }

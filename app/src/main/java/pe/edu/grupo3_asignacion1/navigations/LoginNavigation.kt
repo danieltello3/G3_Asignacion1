@@ -1,6 +1,5 @@
 package pe.edu.grupo3_asignacion1.navigations
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavType
@@ -31,9 +30,9 @@ fun LoginNavigation(
 
     NavHost(
         navController = navController,
-        startDestination = "/"
+        startDestination = "/" //Splash Screen
     ){
-
+        //Login pagina principal
         composable(
             route = "/login/{parameter}?optionalParameter={optionalParameter}",
             arguments = listOf(
@@ -47,6 +46,7 @@ fun LoginNavigation(
                 }
             )
         ){ entry ->
+            //Si no hay parametros: route = /login/
             if(parameter == null || parameter == ""){
                 LoginScreen(
                     loginScreenViewModel,
@@ -57,7 +57,7 @@ fun LoginNavigation(
                         navController.navigate("/create_account")
                     }
                 )
-            }else{
+            }else{ //si hay parámetros: /login/sth else
                 loginScreenViewModel.updateUsuario(parameter)
                 LoginScreen(
                     loginScreenViewModel,
@@ -73,7 +73,7 @@ fun LoginNavigation(
 
         //Navegación de la pantalla Login
         composable(
-            route = "/login/",
+            route = "/login",
             arguments = listOf()
         ){ entry ->
             LoginScreen(
@@ -103,16 +103,17 @@ fun LoginNavigation(
             route = "/reset_password",
             arguments = listOf()
         ){ entry ->
+
             ResetPasswordScreen(
-                navController,
                 resetPasswordScreenViewModel,
                 goToLoginScreen = {
-                    /*
-                    Log.d("pe.edu.g3_asignacion1", resetPasswordScreenViewModel.correo.value.toString())
                     val parameter = resetPasswordScreenViewModel.correo.value.toString()
-                     */
                     navController.navigate("/login/$parameter")
+                },
+                goToCreateAccountScreen = {
+                    navController.navigate("/create_account")
                 }
+
             )
         }
 

@@ -162,7 +162,7 @@ public fun CreateAccountScreen(viewModel: CreateAccountViewModel,
                     .fillMaxWidth()
                     .padding(top = 5.dp),
                 onClick = {
-                    goToLoginScreen
+                    goToLoginScreen()
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = GrayUL)
             ) {
@@ -173,7 +173,7 @@ public fun CreateAccountScreen(viewModel: CreateAccountViewModel,
                     .fillMaxWidth()
                     .padding(top = 5.dp),
                 onClick = {
-                    goToResetPasswordScreen
+                    goToResetPasswordScreen()
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = GrayUL)
             ) {

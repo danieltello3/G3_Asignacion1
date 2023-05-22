@@ -191,7 +191,7 @@ public fun LoginScreen(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 10.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                    .padding(top = 10.dp),
                 onClick = {
                     goToCreateAccountScreen()
                 },
@@ -202,7 +202,7 @@ public fun LoginScreen(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 1.dp, /*start = 40.dp, end = 40.dp*/),
+                    .padding(top = 1.dp),
                 onClick = {
                     goToResetPasswordScreen()
                 },
