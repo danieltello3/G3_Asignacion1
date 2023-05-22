@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -23,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.rememberImagePainter
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.models.Photo
 import pe.edu.grupo3_asignacion1.models.User
@@ -54,7 +56,8 @@ fun PerfilFirstRow(
                     .align(Alignment.CenterVertically)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.foto_perfil),
+                    painter = rememberImagePainter(data= user.imagen),
+                    contentScale = ContentScale.FillWidth,
                     contentDescription = "foto de perfil",
                     modifier = Modifier
                         .size(100.dp)

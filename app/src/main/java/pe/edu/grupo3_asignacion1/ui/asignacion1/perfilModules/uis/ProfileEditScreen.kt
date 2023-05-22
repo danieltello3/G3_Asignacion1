@@ -6,6 +6,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,6 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -49,6 +51,8 @@ public fun ProfileEditScreen(
     val correo: String by viewModel.mail.observeAsState("")
     val mensaje : String by viewModel.mensaje.observeAsState(initial = "")
     val password: String by viewModel.password.observeAsState("")
+    val newPassword: String by viewModel.newPassword.observeAsState("")
+    val newPasswordConfirm: String by viewModel.newPasswordConfirm.observeAsState("")
     val mensajePassword: String by viewModel.mensajePassword.observeAsState("")
 
     val context = LocalContext.current
@@ -58,7 +62,7 @@ public fun ProfileEditScreen(
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
         sheetShape = RoundedCornerShape(topEnd = 25.dp, topStart = 25.dp),
-        sheetBackgroundColor = Color.Black,
+        sheetBackgroundColor = if (isSystemInDarkTheme()) Color.Black else Color.White,
         sheetContent = {
             Column(
                 modifier = Modifier
@@ -74,7 +78,8 @@ public fun ProfileEditScreen(
                 ){
                     Text(
                         text = "Cambiar Contraseña",
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        fontWeight = FontWeight(600)
                     )
                 }
                 TextField(
@@ -95,9 +100,9 @@ public fun ProfileEditScreen(
                     )
                 )
                 TextField(
-                    value = password,
+                    value = newPassword,
                     onValueChange = {
-                        viewModel.updatePassword(it)
+                        viewModel.updateNewPassword(it)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     label = {
@@ -112,9 +117,9 @@ public fun ProfileEditScreen(
                     )
                 )
                 TextField(
-                    value = password,
+                    value = newPasswordConfirm,
                     onValueChange = {
-                        viewModel.updatePassword(it)
+                        viewModel.updateNewPasswordConfirm(it)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     label = {
@@ -128,7 +133,7 @@ public fun ProfileEditScreen(
                         backgroundColor = Color.Transparent
                     )
                 )
-                if(mensaje.contains("Error")){
+                if(mensajePassword.contains("Error")){
                     Text(
                         text = mensajePassword.split(":")[1],
                         textAlign = TextAlign.Center,
@@ -148,7 +153,7 @@ public fun ProfileEditScreen(
                     )
                 }
                 Button(
-                    onClick = { viewModel.validarOldPassword(context) },
+                    onClick = { viewModel.validarChangePassword(context) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 5.dp),
@@ -174,7 +179,8 @@ public fun ProfileEditScreen(
             ){
                 Text(
                     text = "Editar Perfil",
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight(600)
                 )
             }
             Row(

@@ -1,9 +1,12 @@
 package pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.viewmodels
 
 import android.content.Context
+import android.content.Intent
+import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import pe.edu.grupo3_asignacion1.activities.AppActivity
 import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.services.UserService
 
@@ -56,6 +59,18 @@ class ProfileEditViewModel: ViewModel() {
         _password.postValue(it)
     }
 
+    private val _newPassword = MutableLiveData<String>("")
+    var newPassword: LiveData<String> = _newPassword
+    fun updateNewPassword(it: String){
+        _newPassword .postValue(it)
+    }
+
+    private val _newPasswordConfirm = MutableLiveData<String>("")
+    var newPasswordConfirm: LiveData<String> = _newPasswordConfirm
+    fun updateNewPasswordConfirm(it: String){
+        _newPasswordConfirm.postValue(it)
+    }
+
     fun getUser(id: Int){
         val user: User = UserService.fetchOne(id)
         if(user != null){
@@ -72,15 +87,33 @@ class ProfileEditViewModel: ViewModel() {
         if(message != "OK"){
             updateMensaje("Error: $message")
         }else{
+            UserService.updateUser(id.value!!,name.value!!,user.value!!,mail.value!!)
             updateMensaje("Perfil Editado")
         }
+        Handler().postDelayed({
+            updateMensaje("")
+        }, 1000)
     }
 
-    fun validarOldPassword(context: Context) {
+    fun validarChangePassword(context: Context) {
+        var message: String = "Contraseña Cambiada"
         val res: Boolean = UserService.validatePassword(id.value!!, password.value!!)
-        if(res){
-            updateMensajePassword("Error: Contraseña antigua no coincide")
+        if(!res){
+            message = "Error: Contraseña antigua no coincide"
         }
+        if(newPassword.value != newPasswordConfirm.value){
+            message = "Error: La nueva contraseña no coincide con confirmar contraseña"
+        }
+        updateMensajePassword(message)
+        if(!message.contains("Error")){
+            UserService.updatePassword(id.value!!,newPassword.value!!)
+            updatePassword("")
+            updateNewPassword("")
+            updateNewPasswordConfirm("")
+        }
+        Handler().postDelayed({
+            updateMensajePassword("")
+        }, 1000)
     }
 
     fun unsetUser(){
