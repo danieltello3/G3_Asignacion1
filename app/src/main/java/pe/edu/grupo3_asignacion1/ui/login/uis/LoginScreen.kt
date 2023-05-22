@@ -197,8 +197,9 @@ public fun LoginScreen(
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = GrayUL)
             ){
-                Text("Crear Cuenta".uppercase())
+                Text("CREAR CUENTA")
             }
+
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -208,7 +209,7 @@ public fun LoginScreen(
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = GrayUL)
             ){
-                Text("Recuperar contraseña".uppercase())
+                Text("RECUPERAR CONTRASEÑA")
             }
 
             BackHandler {

@@ -15,6 +15,7 @@ import pe.edu.grupo3_asignacion1.navigations.LoginNavigation
 import pe.edu.grupo3_asignacion1.ui.login.uis.SplashScreen
 import pe.edu.grupo3_asignacion1.ui.login.viewmodels.LoginViewModel
 import pe.edu.grupo3_asignacion1.ui.login.viewmodels.*
+import pe.edu.grupo3_asignacion1.ui.theme.Grupo3_Asignacion1Theme
 
 class MainActivity: ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.P)
@@ -22,26 +23,28 @@ class MainActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         // login navigation
-        val loginViewModel = LoginViewModel()
-        val resetPasswordViewModel = ResetPasswordViewModel()
-        val createAccountViewModel = CreateAccountViewModel()
+        val loginScreenViewModel = LoginViewModel()
+        val resetPasswordScreenViewModel = ResetPasswordViewModel()
+        val createAccountScreenViewModel = CreateAccountViewModel()
 
         // screen navigation
         setContent {
             val navController = rememberNavController()
-            // A surface container using the 'background' color from the theme
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                //color = MaterialTheme.colors.background
-            ) {
-                SplashScreen(navController)
-                LoginNavigation(
-                    loginScreenViewModel = loginViewModel,
-                    resetPasswordScreenViewModel = resetPasswordViewModel,
-                    createAccountScreenViewModel = createAccountViewModel
-                )
-                //PokemonDetailScreen(viewModel = PokemonDetailViewModel())
-                //TouchScreen()
+            Grupo3_Asignacion1Theme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    //color = MaterialTheme.colors.background
+                ) {
+                    SplashScreen(navController)
+                    LoginNavigation(
+                        loginScreenViewModel = loginScreenViewModel,
+                        resetPasswordScreenViewModel = resetPasswordScreenViewModel,
+                        createAccountScreenViewModel = createAccountScreenViewModel
+                    )
+                    //PokemonDetailScreen(viewModel = PokemonDetailViewModel())
+                    //TouchScreen()
+                }
             }
 
         }

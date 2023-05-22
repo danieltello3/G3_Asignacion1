@@ -1,5 +1,6 @@
 package pe.edu.grupo3_asignacion1.navigations
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavType
@@ -19,8 +20,8 @@ import pe.edu.grupo3_asignacion1.ui.login.uis.ResetPasswordScreen
 
 @Composable
 fun LoginNavigation(
-    resetPasswordScreenViewModel: ResetPasswordViewModel,
     loginScreenViewModel: LoginViewModel,
+    resetPasswordScreenViewModel: ResetPasswordViewModel,
     createAccountScreenViewModel: CreateAccountViewModel
 ) {
     val navController = rememberNavController()
@@ -32,7 +33,6 @@ fun LoginNavigation(
         navController = navController,
         startDestination = "/" //Splash Screen
     ){
-        //Login pagina principal
         composable(
             route = "/login/{parameter}?optionalParameter={optionalParameter}",
             arguments = listOf(
@@ -46,7 +46,6 @@ fun LoginNavigation(
                 }
             )
         ){ entry ->
-            //Si no hay parametros: route = /login/
             if(parameter == null || parameter == ""){
                 LoginScreen(
                     loginScreenViewModel,
@@ -57,7 +56,7 @@ fun LoginNavigation(
                         navController.navigate("/create_account")
                     }
                 )
-            }else{ //si hay parámetros: /login/sth else
+            }else{
                 loginScreenViewModel.updateUsuario(parameter)
                 LoginScreen(
                     loginScreenViewModel,
@@ -70,12 +69,12 @@ fun LoginNavigation(
                 )
             }
         }
-
         //Navegación de la pantalla Login
         composable(
             route = "/login",
             arguments = listOf()
         ){ entry ->
+            Log.d("pe.edu.g3_asignacion", "LoginScreen LoginNavigation")
             LoginScreen(
                 loginScreenViewModel,
                 goToResetPasswordScreen = {
@@ -103,7 +102,7 @@ fun LoginNavigation(
             route = "/reset_password",
             arguments = listOf()
         ){ entry ->
-
+            Log.d("pe.edu.g3_asignacion", "ResetPasswordScreen LoginNavigation")
             ResetPasswordScreen(
                 resetPasswordScreenViewModel,
                 goToLoginScreen = {
@@ -122,6 +121,7 @@ fun LoginNavigation(
             route = "/create_account",
             arguments = listOf()
         ){ entry ->
+            Log.d("pe.edu.g3_asignacion", "CreateAccount LoginNavigation")
             CreateAccountScreen(
                 createAccountScreenViewModel,
                 goToResetPasswordScreen = {

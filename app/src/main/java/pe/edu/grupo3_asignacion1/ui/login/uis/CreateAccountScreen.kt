@@ -3,6 +3,7 @@ package pe.edu.grupo3_asignacion1.ui.login.uis
 import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
@@ -16,6 +17,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,7 +32,8 @@ import pe.edu.grupo3_asignacion1.ui.theme.OrangeUL
 @Preview
 @Composable
 public fun CreateAccountScreenPreview(){
-    CreateAccountScreen(CreateAccountViewModel(),
+    CreateAccountScreen(
+        CreateAccountViewModel(),
         goToResetPasswordScreen = {},
         goToLoginScreen = {})
 }
@@ -73,6 +77,21 @@ public fun CreateAccountScreen(viewModel: CreateAccountViewModel,
                 fontSize = 20.sp,
                 style = TextStyle(fontWeight = FontWeight.Bold)
             )
+
+            //Cambiar de color del mensaje
+            if(mensaje.contains("Error")){
+                Text(
+                    text = mensaje.split(":")[1],
+                    textAlign = TextAlign.Center,
+                    color = Color.Red
+                )
+            }else{
+                Text(
+                    text = mensaje,
+                    textAlign = TextAlign.Center,
+                    color = Color.Green
+                )
+            }
 
             //TextField de Usuario
             TextField(
@@ -118,6 +137,8 @@ public fun CreateAccountScreen(viewModel: CreateAccountViewModel,
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.Transparent
                 ),
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 label = { Text("Contraseña") },
                 placeholder = { Text(text = "") }
             )
@@ -134,6 +155,8 @@ public fun CreateAccountScreen(viewModel: CreateAccountViewModel,
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.Transparent
                 ),
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 label = { Text("Repetir contraseña") },
                 placeholder = { Text(text = "") }
             )
