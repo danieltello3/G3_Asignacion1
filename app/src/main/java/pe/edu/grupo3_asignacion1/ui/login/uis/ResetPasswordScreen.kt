@@ -1,6 +1,7 @@
 package pe.edu.grupo3_asignacion1.ui.login.uis
 
 import android.app.Activity
+import android.os.Handler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -131,10 +132,9 @@ public fun ResetPasswordScreen(
                     .fillMaxWidth()
                     .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
                 onClick = {
-                    if(viewModel.reset(context)){
-                        goToLoginScreen()
-                    }
-
+                        if(viewModel.reset(context)){
+                            goToLoginScreen()
+                        }
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = OrangeUL)
             ) {

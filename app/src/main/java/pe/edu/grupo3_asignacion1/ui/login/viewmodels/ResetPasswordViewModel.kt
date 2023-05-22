@@ -46,7 +46,8 @@ class ResetPasswordViewModel:ViewModel(){
                     Handler().postDelayed({
                         updateMensaje("")
                         flag = true
-                    }, 1500)
+                    }, 2000)
+
 
                 }else{
                     updateMensaje("Error: No existe en la fuente de datos.")
