@@ -9,12 +9,10 @@ import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
     primary = Color.White,
-    secondary = Teal200
 )
 
 private val LightColorPalette = lightColors(
     primary = Color.Black,
-    secondary = Teal200
 
     /* Other default colors to override
     background = Color.White,
