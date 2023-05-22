@@ -31,7 +31,7 @@ fun LoginNavigation(
 
     NavHost(
         navController = navController,
-        startDestination = "/" //Splash Screen
+        startDestination = "/login" //Splash Screen
     ){
         composable(
             route = "/login/{parameter}?optionalParameter={optionalParameter}",
@@ -84,16 +84,6 @@ fun LoginNavigation(
                     navController.navigate("/create_account")
                 }
 
-            )
-        }
-
-        //Navegación de pantalla Splash (osea, no hay navegación xd)
-        composable(
-            route = "/",
-            arguments = listOf()
-        ){ entry ->
-            SplashScreen(
-                navController
             )
         }
 

@@ -19,24 +19,21 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import pe.edu.grupo3_asignacion1.models.Photo
 import pe.edu.grupo3_asignacion1.models.PhotoList
-import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.services.ImageService
-import pe.edu.grupo3_asignacion1.services.UserService
 
 @Preview
 @Composable
 fun PerfilGridPreview(){
     PerfilGrid(
-        1
+        emptyList()
     )
 }
 
 @Composable
 fun PerfilGrid(
-    userId: Int
+    photos: List<Photo>
 ){
-    val user: User = UserService.fetchOne(userId)
-    var tmpList: List<Photo> = ImageService.fetchByUserId(user.id)
+    var tmpList: List<Photo> = photos
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),

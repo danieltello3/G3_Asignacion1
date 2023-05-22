@@ -1,11 +1,12 @@
 package pe.edu.grupo3_asignacion1.services
 
+import androidx.compose.ui.text.toLowerCase
 import pe.edu.grupo3_asignacion1.models.User
 
 class UserService {
     companion object {
         var users = mutableListOf(
-            User (1, "admin","123", "Super Administrador", "root@ulima.edu.pe", "https://pokefanaticos.com/pokedex/assets/images/pokemon_imagenes/1.png"),
+            User (1, "admin","123", "Super Administrador", "root@ulima.edu.pe", "https://images.pexels.com/photos/5119214/pexels-photo-5119214.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"),
             User (2, "pepe","123", "Pepe Valdivia", "pepe@ulima.edu.pe", "https://pokefanaticos.com/pokedex/assets/images/pokemon_imagenes/2.png"),
             User (3, "sila","123", "Sila Esculapia", "sila@ulima.edu.pe", "https://pokefanaticos.com/pokedex/assets/images/pokemon_imagenes/3.png"),
             User (4, "mateo","123", "Mateo Sanchez", "mateo@ulima.edu.pe", "https://pokefanaticos.com/pokedex/assets/images/pokemon_imagenes/4.png"),
@@ -45,6 +46,29 @@ class UserService {
                 }
             }
             return user
+        }
+
+        fun existData(mail: String, user: String,id: Int): String{
+            var message = "OK"
+            for(u in users){
+                if(u.id != id && u.usuario == user){
+                    message = "Usuario se encuentra en uso"
+                }
+                if(u.id != id && u.correo == mail){
+                    message = "Correo se encuentra en uso"
+                }
+            }
+            return message
+        }
+
+        fun validatePassword(id:Int, password:String): Boolean{
+            var response:Boolean = false
+            for(u in users){
+                if(u.id == id && u.contrasenia == password){
+                    response = true
+                }
+            }
+            return response
         }
 
         fun verifyIfEmailAlreadyExists(correo: String): Boolean {

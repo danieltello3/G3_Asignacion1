@@ -1,5 +1,6 @@
 package pe.edu.grupo3_asignacion1.ui.asignacion1.uis
 
+import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
@@ -7,26 +8,35 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.*
+import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.viewmodels.PerfilViewModel
 
 
 @Preview
 @Composable
-fun PerfilScreenPreview(){
+public fun PerfilScreenPreview(){
     PerfilScreen(
+        PerfilViewModel(),
         rememberNavController(),
-    1
+        1
     )
 }
 //@Preview(showBackground = true)
 @Composable
-fun PerfilScreen(
-    navController: NavController,
+public fun PerfilScreen(
+    viewModel: PerfilViewModel,
+    navController: NavHostController,
     userId: Int
 ){
+    val context = LocalContext.current
+    val activity = context as Activity
+    val intent = activity.intent
+    //val userId = intent.getIntExtra("user_id",0)
+    viewModel.setPhotos(userId)
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -35,13 +45,11 @@ fun PerfilScreen(
         //Archivo Brillitt
         PerfilFirstRow(navController = navController, userId = userId)
         PerfilNombre(userId)
-        PerfilButtons()
+        PerfilButtons(navController,userId)
         //Archivo Gonzalo
         HighlightsStories()
         //Archivo Daniel
-        PerfilGrid(
-            userId
-        )
+        viewModel.photos?.let { PerfilGrid(it) }
     }
 
 
