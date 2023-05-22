@@ -9,23 +9,28 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.uis.ProfileEditScreen
+import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.viewmodels.ProfileEditViewModel
+import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.PerfilScreen
+import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.viewmodels.PerfilViewModel
 
 @Composable
 fun AppNavigation(
     /*pokemonScreenModel: PokemonViewModel,
     pokemonDetailViewModel: PokemonDetailViewModel,
-    profileViewModel: ProfileViewModel,
     seguidoresViewModel: SeguidorViewModel,
     seguidosViewModel: SeguidosViewModel,*/
+    perfilViewModel: PerfilViewModel,
+    profileEditViewModel: ProfileEditViewModel
 ){
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val pokemonIdParam = navBackStackEntry?.arguments?.getInt("pokemon_id")
-    val userId = navBackStackEntry?.arguments?.getInt("user_id")
-
+    //val pokemonIdParam = navBackStackEntry?.arguments?.getInt("pokemon_id")
+    //val userId = navBackStackEntry?.arguments?.getInt("user_id")
+    val userId = 1
     NavHost(
         navController = navController,
-        startDestination = "/pokemon"
+        startDestination = "/profile/?user_id={user_id}"
     ){
         // profile
         composable(
@@ -33,15 +38,16 @@ fun AppNavigation(
             arguments = listOf(
                 navArgument("user_id"){
                     type = NavType.IntType
-                    defaultValue = 0
+                    defaultValue = 2
                 }
             )
         ){
-            /*Log.d("APP_NAVIGATION", pokemonIdParam.toString())
-            profileViewModel.setUsuario(userId!!)
-            ProfileScreen(
-                viewModel = profileViewModel
-            )*/
+            Log.d("APP_NAVIGATION", userId.toString())
+            perfilViewModel.updateId(userId!!)
+            PerfilScreen(
+                viewModel = perfilViewModel,
+                navController
+            )
         }
         // seguidos
         composable(
@@ -75,6 +81,20 @@ fun AppNavigation(
                 viewModel = seguidoresViewModel,
                 navController,
             )*/
+        }
+
+        // editar perfil
+        composable(
+            route = "/profile/edit?user_id={user_id}",
+            arguments = listOf(
+                navArgument("user_id"){
+                    type = NavType.IntType
+                    defaultValue = 0
+                }
+            )
+        ){
+            profileEditViewModel.getUser(userId!!)
+            ProfileEditScreen(viewModel = profileEditViewModel)
         }
     }
 }

@@ -4,4 +4,5 @@ data class Photo(
     var id: Int = 0,
     var url: String = "",
     var usuarioId: Int = 0,
+    var name: String =""
 )

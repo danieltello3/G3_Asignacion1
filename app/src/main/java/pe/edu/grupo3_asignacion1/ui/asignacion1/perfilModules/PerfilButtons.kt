@@ -19,16 +19,24 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.ui.theme.*
 
 @Preview()
 @Composable
 fun PerfilButtonsPreview(){
-    PerfilButtons()
+    PerfilButtons(
+        rememberNavController(),
+        0
+    )
 }
 @Composable
-fun PerfilButtons() {
+fun PerfilButtons(
+    navController: NavHostController,
+    id: Int
+) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
@@ -43,7 +51,9 @@ fun PerfilButtons() {
                 .height(40.dp)
         ) {
             Button(
-                onClick = { /* Acción al hacer click en el botón */ },
+                onClick = {
+                          navController.navigate("/profile/edit?user_id=$id")
+                },
                 modifier = Modifier
                     .height(40.dp)
                     .fillMaxWidth()

@@ -24,12 +24,16 @@ import pe.edu.grupo3_asignacion1.services.ImageService
 @Preview
 @Composable
 fun PerfilGridPreview(){
-    PerfilGrid()
+    PerfilGrid(
+        emptyList()
+    )
 }
 
 @Composable
-fun PerfilGrid(){
-    var tmpList: List<Photo> = ImageService.fetchAll()
+fun PerfilGrid(
+    photos: List<Photo>
+){
+    var tmpList: List<Photo> = photos
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
