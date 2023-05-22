@@ -93,5 +93,17 @@ class UserService {
             }
             return flag
         }
+
+        fun updateUser(id:Int, name: String,user:String,mail:String){
+            val userTemp = users.find{it.id == id}
+            userTemp?.correo = mail
+            userTemp?.nombre = name
+            userTemp?.usuario = user
+        }
+
+        fun updatePassword(id:Int, password: String){
+            val userTemp = users.find{it.id == id}
+            userTemp?.contrasenia = password
+        }
     }
 }
