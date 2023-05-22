@@ -54,17 +54,17 @@ class CreateAccountViewModel : ViewModel(){
             //Si es que no son nulas las casillas
             val bool = UserService.verifyIfUserAlreadyExists(usuario.value!!)
             if(bool){
-                updateMensaje("El usuario ingresado ya existe.")
+                updateMensaje("Error:El usuario ingresado ya existe.")
             }else{
                 if(matchFound){
                     //Validar si el correo ya existe
                     val bool2 =UserService.verifyIfEmailAlreadyExists(correo.value!!)
                     if(bool2){
-                        updateMensaje("El correo ingresado ya se encuentra registrado.")
+                        updateMensaje("Error:El correo ingresado ya se encuentra registrado.")
                     }else{
                         //Para coincidencia de contraseñas
                         if(contrasenia.value!! != repeatcontrasenia.value!!){
-                            updateMensaje("Las contraseñas deben ser iguales")
+                            updateMensaje("Error:Las contraseñas deben ser iguales")
                         }else{
                             //Todo bien, todo correcto
                             updateMensaje("Todo OK")
@@ -81,11 +81,11 @@ class CreateAccountViewModel : ViewModel(){
                         }
                     }
                 }else{
-                    updateMensaje("Error: Ingrese un correo válido")
+                    updateMensaje("Error:Ingrese un correo válido")
                 }
             }
         }else{
-            updateMensaje("Complete todas las casillas")
+            updateMensaje("Error:Complete todas las casillas")
         }
 
 

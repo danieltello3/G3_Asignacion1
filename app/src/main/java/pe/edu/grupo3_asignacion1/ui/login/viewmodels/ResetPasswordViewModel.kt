@@ -42,15 +42,14 @@ class ResetPasswordViewModel:ViewModel(){
                 //Validar si existe en la fuente de datos
                 val bool = UserService.verifyIfEmailAlreadyExists(correo.value!!)
                 if(bool){
-                    updateMensaje("Todo OK.")
-                    flag = true
-                    //Aquí regresa a la Activity de Login
-
-                    /*Handler().postDelayed({
-                        navController.navigate("/login/")
+                    updateMensaje("Mensaje enviado (aunque todavía no se envía)")
+                    Handler().postDelayed({
+                        updateMensaje("")
+                        flag = true
                     }, 1500)
 
-                     */
+                }else{
+                    updateMensaje("Error: No existe en la fuente de datos.")
                 }
             }else{
                 updateMensaje("Error: Ingrese un correo válido")

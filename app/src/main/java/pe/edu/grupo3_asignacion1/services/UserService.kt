@@ -15,7 +15,7 @@ class UserService {
             User (7, "juan","123", "Juan Vargas", "juan@ulima.edu.pe", "https://pokefanaticos.com/pokedex/assets/images/pokemon_imagenes/7.png"),
             User (8, "judas","123", "Judas Iscariote", "judas@ulima.edu.pe", "https://pokefanaticos.com/pokedex/assets/images/pokemon_imagenes/8.png"),
             User (9, "tito","123", "Tito Garcia", "tito@ulima.edu.pe", "https://pokefanaticos.com/pokedex/assets/images/pokemon_imagenes/9.png"),
-            User (10, "filemon","123", "Filemon Peluche", "filemon@ulima.edu.pe", "https://pokefanaticos.com/pokedex/assets/images/pokemon_imagenes/9.png"),
+            User (10, "filemon","123", "Filemon Peluche", "filemon@ulima.edu.pe", "https://pokefanaticos.com/pokedex/assets/images/pokemon_imagenes/10.png"),
         )
 
 
@@ -31,10 +31,11 @@ class UserService {
 
         fun create(usuario: String, contrasenia: String,correo: String): Int{
             val listSize = users.size
-            val imagen = "https://pokefanaticos.com/pokedex/assets/images/pokemon_imagenes/"+(listSize-1)+".png"
+
+            val imagen:String = "https://pokefanaticos.com/pokedex/assets/images/pokemon_imagenes/"+(listSize-1)+".png"
             val user = User(listSize+1,usuario,contrasenia,usuario,correo,imagen)
             users.add(listSize,user)
-            return listSize
+            return listSize+1
 
         }
 
@@ -72,7 +73,7 @@ class UserService {
         }
 
         fun verifyIfEmailAlreadyExists(correo: String): Boolean {
-            var flag = false
+            var flag:Boolean = false
             for (u in users){
                 if(u.correo == correo){
                     flag = true

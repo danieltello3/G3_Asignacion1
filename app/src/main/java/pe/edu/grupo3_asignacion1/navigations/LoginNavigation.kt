@@ -96,8 +96,7 @@ fun LoginNavigation(
             ResetPasswordScreen(
                 resetPasswordScreenViewModel,
                 goToLoginScreen = {
-                    val parameter = resetPasswordScreenViewModel.correo.value.toString()
-                    navController.navigate("/login/$parameter")
+                    navController.navigate("/login")
                 },
                 goToCreateAccountScreen = {
                     navController.navigate("/create_account")
@@ -118,7 +117,7 @@ fun LoginNavigation(
                     navController.navigate("/reset_password")
                 },
                 goToLoginScreen = {
-                    navController.navigate("/home_screen")
+                    navController.navigate("/login")
                 }
             )
 
