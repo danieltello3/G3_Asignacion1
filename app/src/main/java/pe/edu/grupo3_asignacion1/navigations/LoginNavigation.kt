@@ -9,13 +9,21 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import pe.edu.grupo3_asignacion1.ui.login.uis.CreateAccountScreen
+import pe.edu.grupo3_asignacion1.ui.login.uis.LoginScreen
+import pe.edu.grupo3_asignacion1.ui.login.uis.SplashScreen
+import pe.edu.grupo3_asignacion1.ui.login.viewmodels.CreateAccountViewModel
+import pe.edu.grupo3_asignacion1.ui.login.viewmodels.LoginViewModel
+import pe.edu.grupo3_asignacion1.ui.login.viewmodels.ResetPasswordViewModel
+import pe.edu.grupo3_asignacion1.ui.login.uis.ResetPasswordScreen
 
 
 @Composable
 fun LoginNavigation(
-    /*loginScreenViewModel: LoginViewModel,
-    resetPasswordScreenViewModel: ResetPasswordScreenViewModel,*/
-){
+    loginScreenViewModel: LoginViewModel,
+    resetPasswordScreenViewModel: ResetPasswordViewModel,
+    createAccountScreenViewModel: CreateAccountViewModel
+) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val parameter = navBackStackEntry?.arguments?.getString("parameter")
@@ -23,7 +31,7 @@ fun LoginNavigation(
 
     NavHost(
         navController = navController,
-        startDestination = "/"
+        startDestination = "/login" //Splash Screen
     ){
         composable(
             route = "/login/{parameter}?optionalParameter={optionalParameter}",
@@ -38,58 +46,82 @@ fun LoginNavigation(
                 }
             )
         ){ entry ->
-            Log.d("pe.edu.ulima", "1 +++++++++++++++++++++++++++++++++++++++++++")
-            Log.d("pe.edu.ulima", parameter.toString())
-            Log.d("pe.edu.ulima", optionalParameter.toString())
-            Log.d("pe.edu.ulima", "2 +++++++++++++++++++++++++++++++++++++++++++")
             if(parameter == null || parameter == ""){
-                /*LoginScreen(
-                    loginScreenViewModel,
-                    goToResetPasswordScreen = {
-                        navController.navigate("/reset_password")
-                    }
-                )*/
-            }else{
-                /*loginScreenViewModel.updateUsuario(parameter)
                 LoginScreen(
                     loginScreenViewModel,
                     goToResetPasswordScreen = {
                         navController.navigate("/reset_password")
+                    },
+                    goToCreateAccountScreen = {
+                        navController.navigate("/create_account")
                     }
-                )*/
+                )
+            }else{
+                loginScreenViewModel.updateUsuario(parameter)
+                LoginScreen(
+                    loginScreenViewModel,
+                    goToResetPasswordScreen = {
+                        navController.navigate("/reset_password")
+                    },
+                    goToCreateAccountScreen = {
+                        navController.navigate("/create_account")
+                    }
+                )
             }
         }
+        //Navegación de la pantalla Login
         composable(
-            route = "/login/",
+            route = "/login",
             arguments = listOf()
         ){ entry ->
-            /*LoginScreen(
+            Log.d("pe.edu.g3_asignacion", "LoginScreen LoginNavigation")
+            LoginScreen(
                 loginScreenViewModel,
                 goToResetPasswordScreen = {
                     navController.navigate("/reset_password")
+                },
+                goToCreateAccountScreen = {
+                    navController.navigate("/create_account")
                 }
-            )*/
+
+            )
         }
-        composable(
-            route = "/",
-            arguments = listOf()
-        ){ entry ->
-            /*SplashScreen(
-                navController
-            )*/
-        }
+
+        //Navegación de la pantalla Restablecer Contraseña
         composable(
             route = "/reset_password",
             arguments = listOf()
         ){ entry ->
-            /*ResetPasswordScreen(
+            Log.d("pe.edu.g3_asignacion", "ResetPasswordScreen LoginNavigation")
+            ResetPasswordScreen(
                 resetPasswordScreenViewModel,
                 goToLoginScreen = {
-                    Log.d("pe.edu.ulima", resetPasswordScreenViewModel.correo.value.toString())
                     val parameter = resetPasswordScreenViewModel.correo.value.toString()
                     navController.navigate("/login/$parameter")
+                },
+                goToCreateAccountScreen = {
+                    navController.navigate("/create_account")
                 }
-            )*/
+
+            )
+        }
+
+        //Navegacion de la pantalla Crear Cuenta
+        composable(
+            route = "/create_account",
+            arguments = listOf()
+        ){ entry ->
+            Log.d("pe.edu.g3_asignacion", "CreateAccount LoginNavigation")
+            CreateAccountScreen(
+                createAccountScreenViewModel,
+                goToResetPasswordScreen = {
+                    navController.navigate("/reset_password")
+                },
+                goToLoginScreen = {
+                    navController.navigate("/home_screen")
+                }
+            )
+
         }
     }
 }

@@ -10,9 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.*
@@ -24,20 +21,21 @@ import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.viewmodels.PerfilViewModel
 public fun PerfilScreenPreview(){
     PerfilScreen(
         PerfilViewModel(),
-        rememberNavController()
+        rememberNavController(),
+        1
     )
 }
 //@Preview(showBackground = true)
 @Composable
 public fun PerfilScreen(
     viewModel: PerfilViewModel,
-    navController: NavHostController
+    navController: NavHostController,
+    userId: Int
 ){
     val context = LocalContext.current
     val activity = context as Activity
     val intent = activity.intent
     //val userId = intent.getIntExtra("user_id",0)
-    val userId = 2 //comentar luego
     viewModel.setPhotos(userId)
     Column(
         modifier = Modifier
@@ -45,8 +43,8 @@ public fun PerfilScreen(
             .background(if (isSystemInDarkTheme()) Color.Black else Color.White))
     {
         //Archivo Brillitt
-        PerfilFirstRow()
-        PerfilNombre()
+        PerfilFirstRow(navController = navController, userId = userId)
+        PerfilNombre(userId)
         PerfilButtons(navController,userId)
         //Archivo Gonzalo
         HighlightsStories()

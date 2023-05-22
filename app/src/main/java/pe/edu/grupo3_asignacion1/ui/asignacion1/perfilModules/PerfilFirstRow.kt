@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,12 +22,25 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import pe.edu.grupo3_asignacion1.R
+import pe.edu.grupo3_asignacion1.models.Photo
+import pe.edu.grupo3_asignacion1.models.User
+import pe.edu.grupo3_asignacion1.services.FollowerService
+import pe.edu.grupo3_asignacion1.services.ImageService
+import pe.edu.grupo3_asignacion1.services.UserService
 import pe.edu.grupo3_asignacion1.ui.theme.*
 
 @Composable
-@Preview(showBackground = true)
-fun PerfilFirstRow() {
+fun PerfilFirstRow(
+    navController: NavController,
+    userId: Int
+) {
+    val user: User = UserService.fetchOne(userId)
+    val seguidos: Int = FollowerService.countFollowingsBySeId(userId)
+    val seguidores: Int = FollowerService.countFollowersByUserId(userId)
+    var posts:Int = ImageService.fetchByUserId(user.id).size
+
     Column() {
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
@@ -58,7 +72,7 @@ fun PerfilFirstRow() {
                 .align(Alignment.CenterVertically)
                 .weight(1f)) {
                 Text(
-                    text = "100", fontSize = 24.sp, fontWeight = FontWeight.Bold,
+                    text = posts.toString(), fontSize = 24.sp, fontWeight = FontWeight.Bold,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis
@@ -76,9 +90,13 @@ fun PerfilFirstRow() {
             }
             Column(modifier = Modifier
                 .weight(1f)
-                .align(Alignment.CenterVertically)) {
+                .align(Alignment.CenterVertically)
+                .clickable {
+                    var indexId = 0
+                navController.navigate("/profile/follows/${user.id}/${indexId}")
+            }) {
                 Text(
-                    text = "536", fontSize = 24.sp, fontWeight = FontWeight.Bold,
+                    text = seguidores.toString(), fontSize = 24.sp, fontWeight = FontWeight.Bold,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis
@@ -92,9 +110,13 @@ fun PerfilFirstRow() {
             }
             Column(modifier = Modifier
                 .weight(1f)
-                .align(Alignment.CenterVertically)) {
+                .align(Alignment.CenterVertically)
+                .clickable {
+                    var indexId = 1
+                    navController.navigate("/profile/follows/${user.id}/${indexId}")
+                }) {
                 Text(
-                    text = "536", fontSize = 24.sp, fontWeight = FontWeight.Bold,
+                    text = seguidos.toString(), fontSize = 24.sp, fontWeight = FontWeight.Bold,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis
