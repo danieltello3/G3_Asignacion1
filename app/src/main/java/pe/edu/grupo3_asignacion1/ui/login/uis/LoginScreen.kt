@@ -9,16 +9,20 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,7 +30,6 @@ import androidx.compose.ui.unit.sp
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.ui.login.viewmodels.LoginViewModel
 import pe.edu.grupo3_asignacion1.ui.theme.*
-
 
 @Preview
 @Composable
@@ -49,6 +52,8 @@ public fun LoginScreen(
     val usuario : String by viewModel.usuario.observeAsState(initial = "")
     val contrasenia : String by viewModel.contrasenia.observeAsState(initial = "")
     val mensaje : String by viewModel.mensaje.observeAsState(initial = "")
+    val passwordVisible = remember { mutableStateOf(false) }
+
     // close
     Box(modifier = Modifier.fillMaxSize()) {
         IconButton(
@@ -89,7 +94,8 @@ public fun LoginScreen(
             Text(
                 text = "Acceder al sistema",
                 textAlign = TextAlign.Center,
-                fontSize = 20.sp
+                fontSize = 20.sp,
+                style = MaterialTheme.typography.h4
             )
 
             //Cambiar de color del mensaje
@@ -141,7 +147,29 @@ public fun LoginScreen(
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.Transparent
                 ),
-                visualTransformation = PasswordVisualTransformation(),
+                trailingIcon = {
+                    if(passwordVisible.value){
+                        IconButton(onClick = {passwordVisible.value = false}){
+                            Icon(
+                                imageVector = Icons.Filled.Visibility,
+                                contentDescription = null
+                            )
+                        }
+                    }
+                    else {
+                        IconButton(onClick = {passwordVisible.value = true}){
+                            Icon(
+                                imageVector = Icons.Filled.VisibilityOff,
+                                contentDescription = null
+                            )
+                        }
+                    }
+                },
+                visualTransformation = if(passwordVisible.value){
+                    VisualTransformation.None
+                }else{
+                    PasswordVisualTransformation()
+                },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
             // boton Ingresar
