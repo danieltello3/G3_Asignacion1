@@ -60,6 +60,6 @@ public fun SplashScreen(navController: NavHostController){
     }
 
     Handler().postDelayed({
-        navController.navigate("/login/")
-    }, 1500)
+        navController.navigate("/login")
+    }, 2000)
 }

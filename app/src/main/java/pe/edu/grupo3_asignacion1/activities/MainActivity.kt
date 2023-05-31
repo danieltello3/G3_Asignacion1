@@ -42,8 +42,6 @@ class MainActivity: ComponentActivity() {
                         resetPasswordScreenViewModel = resetPasswordScreenViewModel,
                         createAccountScreenViewModel = createAccountScreenViewModel
                     )
-                    //PokemonDetailScreen(viewModel = PokemonDetailViewModel())
-                    //TouchScreen()
                 }
             }
 

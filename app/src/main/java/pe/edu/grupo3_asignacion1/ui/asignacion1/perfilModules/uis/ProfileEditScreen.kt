@@ -13,6 +13,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -23,6 +25,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -54,6 +58,10 @@ public fun ProfileEditScreen(
     val newPassword: String by viewModel.newPassword.observeAsState("")
     val newPasswordConfirm: String by viewModel.newPasswordConfirm.observeAsState("")
     val mensajePassword: String by viewModel.mensajePassword.observeAsState("")
+
+    val passwordVisible = remember {mutableStateOf(false)}
+    val newPasswordVisible = remember {mutableStateOf(false)}
+    val newPasswordConfirmVisible = remember{ mutableStateOf(false)}
 
     val context = LocalContext.current
     val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
@@ -97,7 +105,30 @@ public fun ProfileEditScreen(
                     singleLine = true,
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = Color.Transparent
-                    )
+                    ),
+                    trailingIcon = {
+                        if(passwordVisible.value){
+                            IconButton(onClick = {passwordVisible.value = false}){
+                                Icon(
+                                    imageVector = Icons.Filled.Visibility,
+                                    contentDescription = null
+                                )
+                            }
+                        }
+                        else {
+                            IconButton(onClick = {passwordVisible.value = true}){
+                                Icon(
+                                    imageVector = Icons.Filled.VisibilityOff,
+                                    contentDescription = null
+                                )
+                            }
+                        }
+                    },
+                    visualTransformation = if(passwordVisible.value){
+                        VisualTransformation.None
+                    }else{
+                        PasswordVisualTransformation()
+                    }
                 )
                 TextField(
                     value = newPassword,
@@ -114,7 +145,30 @@ public fun ProfileEditScreen(
                     singleLine = true,
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = Color.Transparent
-                    )
+                    ),
+                    trailingIcon = {
+                        if(newPasswordVisible.value){
+                            IconButton(onClick = {newPasswordVisible.value = false}){
+                                Icon(
+                                    imageVector = Icons.Filled.Visibility,
+                                    contentDescription = null
+                                )
+                            }
+                        }
+                        else {
+                            IconButton(onClick = {newPasswordVisible.value = true}){
+                                Icon(
+                                    imageVector = Icons.Filled.VisibilityOff,
+                                    contentDescription = null
+                                )
+                            }
+                        }
+                    },
+                    visualTransformation = if(newPasswordVisible.value){
+                        VisualTransformation.None
+                    }else{
+                        PasswordVisualTransformation()
+                    }
                 )
                 TextField(
                     value = newPasswordConfirm,
@@ -131,7 +185,30 @@ public fun ProfileEditScreen(
                     singleLine = true,
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = Color.Transparent
-                    )
+                    ),
+                    trailingIcon = {
+                        if(newPasswordConfirmVisible.value){
+                            IconButton(onClick = {newPasswordConfirmVisible.value = false}){
+                                Icon(
+                                    imageVector = Icons.Filled.Visibility,
+                                    contentDescription = null
+                                )
+                            }
+                        }
+                        else {
+                            IconButton(onClick = {newPasswordConfirmVisible.value = true}){
+                                Icon(
+                                    imageVector = Icons.Filled.VisibilityOff,
+                                    contentDescription = null
+                                )
+                            }
+                        }
+                    },
+                    visualTransformation = if(newPasswordConfirmVisible.value){
+                        VisualTransformation.None
+                    }else{
+                        PasswordVisualTransformation()
+                    },
                 )
                 if(mensajePassword.contains("Error")){
                     Text(

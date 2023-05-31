@@ -83,7 +83,7 @@ fun PerfilFirstRow(
                 Text(
                     text = "Publicaciones",
                     maxLines = 1,
-                    fontSize = 17.sp,
+                    fontSize = 16.sp,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally),
@@ -105,7 +105,8 @@ fun PerfilFirstRow(
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "Seguidores", fontSize = 17.sp,
+                    text = "Seguidores", fontSize = 16.sp,
+                    maxLines = 1,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis
@@ -125,7 +126,8 @@ fun PerfilFirstRow(
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "Seguidos", fontSize = 17.sp,
+                    text = "Seguidos", fontSize = 16.sp,
+                    maxLines = 1,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis
