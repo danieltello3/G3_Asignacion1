@@ -25,7 +25,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun Grupo3Asignacion1Theme(
+fun Grupo3_Asignacion1Theme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

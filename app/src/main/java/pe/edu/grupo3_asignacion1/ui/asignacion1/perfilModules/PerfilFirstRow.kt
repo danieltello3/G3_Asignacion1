@@ -23,23 +23,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.rememberImagePainter
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.models.Photo
 import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.services.FollowerService
 import pe.edu.grupo3_asignacion1.services.ImageService
 import pe.edu.grupo3_asignacion1.services.UserService
+import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.FollowViewModel
+import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.ImagesViewModel
+import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.PerfilViewModel
 import pe.edu.grupo3_asignacion1.ui.theme.*
 
 @Composable
 fun PerfilFirstRow(
     navController: NavController,
-    userId: Int
+    perfilViewModel: PerfilViewModel,
+    followViewModel: FollowViewModel,
+    photoViewModel: ImagesViewModel,
 ) {
-    val user: User = UserService.fetchOne(userId)
-    val seguidos: Int = FollowerService.countFollowingsBySeId(userId)
-    val seguidores: Int = FollowerService.countFollowersByUserId(userId)
-    var posts:Int = ImageService.fetchByUserId(user.id).size
+    var seguidos: Int = followViewModel.followings!!.size
+    var seguidores: Int = followViewModel.followers!!.size
+    var posts:Int = photoViewModel.images!!.size
 
     Column() {
         Row(
@@ -54,7 +59,7 @@ fun PerfilFirstRow(
                     .align(Alignment.CenterVertically)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.foto_perfil),
+                    painter = rememberImagePainter(perfilViewModel.imagen.value!!),
                     contentDescription = "foto de perfil",
                     modifier = Modifier
                         .size(100.dp)
@@ -93,7 +98,7 @@ fun PerfilFirstRow(
                 .align(Alignment.CenterVertically)
                 .clickable {
                     var indexId = 0
-                navController.navigate("/profile/follows/${user.id}/${indexId}")
+                navController.navigate("/profile/follows/user_id=${perfilViewModel.id.value!!}/index_id=${indexId}")
             }) {
                 Text(
                     text = seguidores.toString(), fontSize = 24.sp, fontWeight = FontWeight.Bold,
@@ -113,7 +118,7 @@ fun PerfilFirstRow(
                 .align(Alignment.CenterVertically)
                 .clickable {
                     var indexId = 1
-                    navController.navigate("/profile/follows/${user.id}/${indexId}")
+                    navController.navigate("/profile/follows/user_id=${perfilViewModel.id.value!!}/index_id=${indexId}")
                 }) {
                 Text(
                     text = seguidos.toString(), fontSize = 24.sp, fontWeight = FontWeight.Bold,

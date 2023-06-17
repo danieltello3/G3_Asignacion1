@@ -14,7 +14,9 @@ import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.*
 @Composable
 fun AppNavigation(
     followViewModel: FollowViewModel,
-    tabViewModel: TabViewModel
+    tabViewModel: TabViewModel,
+    perfilViewModel: PerfilViewModel,
+    imagesViewModel: ImagesViewModel,
 ){
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -35,24 +37,41 @@ fun AppNavigation(
                 }
             )
         ){
+            var id = userId
+            perfilViewModel.setUsuario(id!!)
+            followViewModel.setFollowings(id!!)
+            followViewModel.setFollowers(id!!)
+            imagesViewModel.setImages(id!!)
+            println(id!!.toString())
+
             PerfilScreen(
                 navController,
-                userId!!
+                id,
+                perfilViewModel,
+                followViewModel,
+                imagesViewModel,
             )
         }
 
         composable(
             route = "/profile/",
         ){
+            perfilViewModel.setUsuario(1)
+            followViewModel.setFollowings(1)
+            followViewModel.setFollowers(1)
+            imagesViewModel.setImages(1)
             PerfilScreen(
                 navController,
-                1
+                1,
+                perfilViewModel,
+                followViewModel,
+                imagesViewModel,
             )
         }
 
         // vista follows
         composable(
-            route = "/profile/follows/{user_id}/{index_id}",
+            route = "/profile/follows/user_id={user_id}/index_id={index_id}",
             arguments = listOf(
                 navArgument("user_id") {
                     type = NavType.IntType
@@ -64,12 +83,11 @@ fun AppNavigation(
                 },
             )
         ){
-            followViewModel.setFollowers(userId!!)
-            followViewModel.setFollowings(userId)
             tabViewModel.updateIndex(indexId!!)
             FollowScreen(
                 followViewModel,
                 tabViewModel,
+                perfilViewModel,
                 navController
             )
         }

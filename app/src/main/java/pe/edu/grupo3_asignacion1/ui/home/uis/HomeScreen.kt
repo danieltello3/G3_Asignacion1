@@ -1,3 +1,4 @@
+package pe.edu.grupo3_asignacion1.ui.home.uis/*
 package pe.edu.grupo3_asignacion1.ui.asignacion1.uis
 
 import androidx.compose.foundation.Image
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.models.Photo
+import pe.edu.grupo3_asignacion1.models.demo.PhotoList
 import pe.edu.grupo3_asignacion1.services.ImageService
 import pe.edu.grupo3_asignacion1.ui.home.viewmodels.HomeScreenViewModel
 import pe.edu.grupo3_asignacion1.ui.theme.OrangeUL
@@ -94,7 +96,9 @@ fun PerfilButtons() {
                 .height(40.dp)
         ) {
             Button(
-                onClick = { /* Acción al hacer click en el botón */ },
+                onClick = { */
+/* Acción al hacer click en el botón *//*
+ },
                 modifier = Modifier
                     .height(40.dp)
                     .fillMaxWidth()
@@ -119,7 +123,9 @@ fun PerfilButtons() {
                 .height(40.dp)
         ) {
             Button(
-                onClick = { /* Acción al hacer click en el botón */ },
+                onClick = { */
+/* Acción al hacer click en el botón *//*
+ },
                 modifier = Modifier
                     .height(40.dp)
                     .fillMaxWidth()
@@ -146,7 +152,9 @@ fun PerfilButtons() {
                 .height(40.dp)
         ) {
             Button(
-                onClick = { /* Acción al hacer click en el botón */ },
+                onClick = { */
+/* Acción al hacer click en el botón *//*
+ },
                 modifier = Modifier
                     //.background(color = Red)
                     .height(40.dp)
@@ -255,7 +263,7 @@ fun PerfilFirstRow() {
 
 @Composable
 fun PerfilGrid(){
-    var tmpList: List<Photo> = ImageService.fetchAll()
+    var tmpList: PhotoList
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
@@ -289,4 +297,4 @@ fun PerfilNombre(){
         )
     }
 
-}
+}*/

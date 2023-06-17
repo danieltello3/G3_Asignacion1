@@ -1,3 +1,4 @@
+/*
 package pe.edu.grupo3_asignacion1.ui.login.uis
 
 import android.app.Activity
@@ -129,7 +130,9 @@ public fun ResetPasswordScreen(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                    .padding(top = 15.dp*/
+/*, start = 40.dp, end = 40.dp*//*
+), // start -> izquierda, end -> derecha
                 onClick = {
                     if(viewModel.reset(context)){
                         goToLoginScreen()
@@ -151,7 +154,9 @@ public fun ResetPasswordScreen(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 5.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                    .padding(top = 5.dp*/
+/*, start = 40.dp, end = 40.dp*//*
+), // start -> izquierda, end -> derecha
                 onClick = {
                     goToLoginScreen()
                 },
@@ -173,4 +178,4 @@ public fun ResetPasswordScreen(
             }
         }
     }
-}
+}*/

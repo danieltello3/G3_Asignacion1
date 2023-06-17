@@ -15,17 +15,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.services.UserService
+import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.PerfilViewModel
 
 @Composable
 fun PerfilNombre(
-    userId: Int
+    userId: Int,
+    viewModel: PerfilViewModel
 ){
-    var user: User = UserService.fetchOne(userId)
 
     Row(){
         Text(
             modifier = Modifier.padding(bottom = 15.dp,start = 20.dp),
-            text = user.usuario,
+            text = viewModel.nombre.value!!,
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             color = if (isSystemInDarkTheme()) Color.White else Color.Black,

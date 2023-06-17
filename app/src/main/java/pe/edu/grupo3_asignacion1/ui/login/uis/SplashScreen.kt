@@ -1,3 +1,4 @@
+/*
 package pe.edu.grupo3_asignacion1.ui.login.uis
 
 import android.content.Intent
@@ -62,4 +63,4 @@ public fun SplashScreen(navController: NavHostController){
     Handler().postDelayed({
         navController.navigate("/login/")
     }, 1500)
-}
+}*/

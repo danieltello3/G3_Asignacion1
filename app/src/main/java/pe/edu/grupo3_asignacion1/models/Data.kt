@@ -1,5 +1,6 @@
 package pe.edu.grupo3_asignacion1.models
 
+/*
 val PhotoList = listOf<Photo>(
 
     Photo(1,"https://images.pexels.com/photos/16407235/pexels-photo-16407235.jpeg",1),
@@ -12,4 +13,4 @@ val PhotoList = listOf<Photo>(
     Photo(8,"https://images.pexels.com/photos/15844493/pexels-photo-15844493.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",2),
     Photo(9,"https://images.pexels.com/photos/4738517/pexels-photo-4738517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",2)
 
-)
+)*/

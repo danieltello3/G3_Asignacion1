@@ -1,3 +1,4 @@
+/*
 package pe.edu.grupo3_asignacion1
 
 import android.os.Bundle
@@ -10,7 +11,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.HomeScreen
 import pe.edu.grupo3_asignacion1.ui.theme.Grupo3_Asignacion1Theme
 import pe.edu.grupo3_asignacion1.ui.login.uis.LoginScreen
 import pe.edu.grupo3_asignacion1.ui.login.viewmodels.LoginViewModel
@@ -48,4 +48,4 @@ fun DefaultPreview() {
     Grupo3_Asignacion1Theme {
         Greeting("Android")
     }
-}
+}*/

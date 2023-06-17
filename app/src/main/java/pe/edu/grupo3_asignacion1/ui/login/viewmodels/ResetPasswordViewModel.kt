@@ -1,3 +1,4 @@
+/*
 package pe.edu.grupo3_asignacion1.ui.login.viewmodels
 
 import android.app.Activity
@@ -46,11 +47,13 @@ class ResetPasswordViewModel:ViewModel(){
                     flag = true
                     //Aquí regresa a la Activity de Login
 
-                    /*Handler().postDelayed({
+                    */
+/*Handler().postDelayed({
                         navController.navigate("/login/")
                     }, 1500)
 
-                     */
+                     *//*
+
                 }
             }else{
                 updateMensaje("Error: Ingrese un correo válido")
@@ -60,4 +63,4 @@ class ResetPasswordViewModel:ViewModel(){
         }
         return flag
     }
-}
+}*/
