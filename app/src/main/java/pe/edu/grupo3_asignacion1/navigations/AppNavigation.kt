@@ -12,6 +12,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.*
 import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.*
+import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.uis.ProfileEditScreen
+import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.viewmodels.ProfileEditViewModel
+import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.viewmodels.PerfilViewModel
 
 @Composable
 fun AppNavigation(
@@ -19,6 +22,7 @@ fun AppNavigation(
     tabViewModel: TabViewModel,
     perfilViewModel: PerfilViewModel,
     imagesViewModel: ImagesViewModel,
+    profileEditViewModel: ProfileEditViewModel,
 ){
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -31,7 +35,7 @@ fun AppNavigation(
         navController = navController,
         startDestination = "/profile/"
     ){
-        // vista para mostrar el listado de pokemones
+        // profile
         composable(
             route = "/profile/?user_id={user_id}",
             arguments = listOf(
@@ -94,6 +98,19 @@ fun AppNavigation(
                 perfilViewModel,
                 navController
             )
+        }
+        // editar perfil
+        composable(
+            route = "/profile/edit?user_id={user_id}",
+            arguments = listOf(
+                navArgument("user_id"){
+                    type = NavType.IntType
+                    defaultValue = 0
+                }
+            )
+        ){
+            profileEditViewModel.getUser(userId!!)
+            ProfileEditScreen(viewModel = profileEditViewModel)
         }
     }
 }

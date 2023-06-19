@@ -44,7 +44,7 @@ fun PerfilScreen(
         //Archivo Brillitt
         PerfilFirstRow(navController = navController, perfilViewModel = perfilViewModel, followViewModel = followViewModel, photoViewModel = photoViewModel)
         PerfilNombre(userId, perfilViewModel)
-        PerfilButtons()
+        PerfilButtons(navController,userId)
         //Archivo Gonzalo
         HighlightsStories()
         //Archivo Daniel

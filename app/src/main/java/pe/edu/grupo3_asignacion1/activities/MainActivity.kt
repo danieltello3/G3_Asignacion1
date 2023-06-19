@@ -37,14 +37,12 @@ class MainActivity: ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     //color = MaterialTheme.colors.background
                 ) {
-                    SplashScreen(navController)
+                    //SplashScreen(navController)
                     LoginNavigation(
                         loginScreenViewModel = loginScreenViewModel,
                         resetPasswordScreenViewModel = resetPasswordScreenViewModel,
                         createAccountScreenViewModel = createAccountScreenViewModel
                     )
-                    //PokemonDetailScreen(viewModel = PokemonDetailViewModel())
-                    //TouchScreen()
                 }
             }
 

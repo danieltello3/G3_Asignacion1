@@ -10,6 +10,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.PerfilScreen
+import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.viewmodels.PerfilViewModel
 import pe.edu.grupo3_asignacion1.ui.login.uis.CreateAccountScreen
 import pe.edu.grupo3_asignacion1.ui.login.uis.LoginScreen
 import pe.edu.grupo3_asignacion1.ui.login.uis.SplashScreen
@@ -17,6 +19,7 @@ import pe.edu.grupo3_asignacion1.ui.login.viewmodels.CreateAccountViewModel
 import pe.edu.grupo3_asignacion1.ui.login.viewmodels.LoginViewModel
 import pe.edu.grupo3_asignacion1.ui.login.viewmodels.ResetPasswordViewModel
 import pe.edu.grupo3_asignacion1.ui.login.uis.ResetPasswordScreen
+import pe.edu.grupo3_asignacion1.ui.login.viewmodels.SplashViewModel
 
 
 @Composable
@@ -29,11 +32,24 @@ fun LoginNavigation(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val parameter = navBackStackEntry?.arguments?.getString("parameter")
     val optionalParameter = navBackStackEntry?.arguments?.getString("optionalParameter")
+    val indexId = navBackStackEntry?.arguments?.getInt("index_id")
+    val userId = navBackStackEntry?.arguments?.getInt("user_id")
 
     NavHost(
         navController = navController,
-        startDestination = "/" //Splash Screen
+        startDestination = "/"
     ){
+        composable(
+            route = "/splash",
+            arguments = listOf(
+            )
+        ){
+            SplashScreen(
+                viewModel = SplashViewModel(),
+                navController
+            )
+        }
+        /*
         composable(
             route = "/login/{parameter}?optionalParameter={optionalParameter}",
             arguments = listOf(
@@ -55,7 +71,8 @@ fun LoginNavigation(
                     },
                     goToCreateAccountScreen = {
                         navController.navigate("/create_account")
-                    }
+                    },
+                    navController
                 )
             }else{
                 loginScreenViewModel.updateUsuario(parameter)
@@ -66,9 +83,23 @@ fun LoginNavigation(
                     },
                     goToCreateAccountScreen = {
                         navController.navigate("/create_account")
-                    }
+                    },
+                    navController
                 )
             }
+        }
+        */
+
+        composable(
+            route="/profile",
+            arguments = listOf(
+            )
+        ){
+            PerfilScreen(
+                viewModel = PerfilViewModel(),
+                navController,
+                1
+            )
         }
         //Navegación de la pantalla Login
         composable(
@@ -83,17 +114,20 @@ fun LoginNavigation(
                 },
                 goToCreateAccountScreen = {
                     navController.navigate("/create_account")
-                }
+                },
+                navController
 
             )
         }
 
-        //Navegación de pantalla Splash (osea, no hay navegación xd)
+        //Navegación de la pantalla Login
         composable(
             route = "/",
             arguments = listOf()
         ){ entry ->
+
             SplashScreen(
+                viewModel = SplashViewModel(),
                 navController
             )
         }
@@ -107,8 +141,7 @@ fun LoginNavigation(
             ResetPasswordScreen(
                 resetPasswordScreenViewModel,
                 goToLoginScreen = {
-                    val parameter = resetPasswordScreenViewModel.correo.value.toString()
-                    navController.navigate("/login/$parameter")
+                    navController.navigate("/login")
                 },
                 goToCreateAccountScreen = {
                     navController.navigate("/create_account")
@@ -129,7 +162,7 @@ fun LoginNavigation(
                     navController.navigate("/reset_password")
                 },
                 goToLoginScreen = {
-                    navController.navigate("/home_screen")
+                    navController.navigate("/login")
                 }
             )
 

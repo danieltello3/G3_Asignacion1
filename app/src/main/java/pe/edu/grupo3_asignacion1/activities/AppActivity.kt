@@ -1,6 +1,7 @@
 package pe.edu.grupo3_asignacion1.activities
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +10,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import pe.edu.grupo3_asignacion1.navigations.AppNavigation
 import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.*
+import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.viewmodels.PerfilViewModel
 import pe.edu.grupo3_asignacion1.ui.theme.Grupo3_Asignacion1Theme
 
 class AppActivity: ComponentActivity() {

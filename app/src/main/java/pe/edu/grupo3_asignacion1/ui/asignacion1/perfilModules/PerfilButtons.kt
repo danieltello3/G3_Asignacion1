@@ -1,9 +1,13 @@
 package pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -12,14 +16,27 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.R
-import pe.edu.grupo3_asignacion1.ui.theme.OrangeUL
+import pe.edu.grupo3_asignacion1.ui.theme.*
 
+@Preview()
 @Composable
-fun PerfilButtons() {
+fun PerfilButtonsPreview(){
+    PerfilButtons(
+        rememberNavController(),
+        0
+    )
+}
+@Composable
+fun PerfilButtons(
+    navController: NavHostController,
+    id: Int
+) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
@@ -34,7 +51,9 @@ fun PerfilButtons() {
                 .height(40.dp)
         ) {
             Button(
-                onClick = {},
+                onClick = {
+                          navController.navigate("/profile/edit?user_id=$id")
+                },
                 modifier = Modifier
                     .height(40.dp)
                     .fillMaxWidth()
@@ -59,7 +78,7 @@ fun PerfilButtons() {
                 .height(40.dp)
         ) {
             Button(
-                onClick = {},
+                onClick = { /* Acción al hacer click en el botón */ },
                 modifier = Modifier
                     .height(40.dp)
                     .fillMaxWidth()
@@ -86,7 +105,7 @@ fun PerfilButtons() {
                 .height(40.dp)
         ) {
             Button(
-                onClick = {},
+                onClick = { /* Acción al hacer click en el botón */ },
                 modifier = Modifier
                     //.background(color = Red)
                     .height(40.dp)

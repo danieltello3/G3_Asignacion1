@@ -7,6 +7,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_ulgram_launcher"
+        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Grupo3_Asignacion1"
@@ -14,7 +15,7 @@
         <activity
             android:name=".activities.AppActivity"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="AppActivity"
             android:theme="@style/Theme.Grupo3_Asignacion1">
             <meta-data
                 android:name="android.app.lib_name"
