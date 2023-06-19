@@ -1,7 +1,7 @@
 package pe.edu.grupo3_asignacion1.services
 
-import pe.edu.grupo3_asignacion1.models.Follows
-import pe.edu.grupo3_asignacion1.models.User
+import pe.edu.grupo3_asignacion1.models.beans.Follows
+import pe.edu.grupo3_asignacion1.models.beans.User
 
 class FollowerService {
     companion object {
@@ -81,8 +81,8 @@ class FollowerService {
             val list: List<Follows> = FollowerService.fetchAll()
             for(follower in list){
                 if(follower.usuarioId == userId){
-                    val seguidor: User = UserService.fetchOne(follower.seguidorId)
-                    respuesta.add(seguidor)
+                    //val seguidor: User = UserService.fetchOne(follower.seguidorId)
+                    //respuesta.add(seguidor)
                 }
             }
             return respuesta
@@ -92,8 +92,8 @@ class FollowerService {
             val list: List<Follows> = FollowerService.fetchAll()
             for(following in list){
                 if(following.seguidorId == userId){
-                    val seguidor: User = UserService.fetchOne(following.usuarioId)
-                    respuesta.add(seguidor)
+                    //val seguidor: User = UserService.fetchOne(following.usuarioId)
+                    //respuesta.add(seguidor)
                 }
             }
             return respuesta

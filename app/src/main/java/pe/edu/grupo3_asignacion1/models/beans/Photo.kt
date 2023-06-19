@@ -1,4 +1,4 @@
-package pe.edu.grupo3_asignacion1.models
+package pe.edu.grupo3_asignacion1.models.beans
 
 data class Photo(
     var id: Int = 0,

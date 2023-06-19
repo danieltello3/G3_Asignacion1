@@ -1,6 +1,6 @@
 package pe.edu.grupo3_asignacion1.services
 
-import pe.edu.grupo3_asignacion1.models.Photo
+import pe.edu.grupo3_asignacion1.models.beans.Photo
 
 
 class ImageService {

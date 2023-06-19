@@ -1,10 +1,6 @@
 package pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
@@ -15,30 +11,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
-import pe.edu.grupo3_asignacion1.R
-import pe.edu.grupo3_asignacion1.models.Photo
-import pe.edu.grupo3_asignacion1.models.User
+import pe.edu.grupo3_asignacion1.models.beans.User
 import pe.edu.grupo3_asignacion1.services.FollowerService
 import pe.edu.grupo3_asignacion1.services.ImageService
-import pe.edu.grupo3_asignacion1.services.UserService
-import pe.edu.grupo3_asignacion1.ui.theme.*
+import pe.edu.grupo3_asignacion1.services.UserService2
 
 @Composable
 fun PerfilFirstRow(
     navController: NavController,
     userId: Int
 ) {
-    val user: User = UserService.fetchOne(userId)
+    val user: User = UserService2.fetchOne(userId)
     val seguidos: Int = FollowerService.countFollowingsBySeId(userId)
     val seguidores: Int = FollowerService.countFollowersByUserId(userId)
     var posts:Int = ImageService.fetchByUserId(user.id).size

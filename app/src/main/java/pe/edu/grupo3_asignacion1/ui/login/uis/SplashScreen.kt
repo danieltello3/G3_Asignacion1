@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -22,19 +23,24 @@ import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.ui.theme.*
 import pe.edu.grupo3_asignacion1.activities.AppActivity
+import pe.edu.grupo3_asignacion1.ui.login.viewmodels.SplashViewModel
 
 @Preview
 @Composable
 public fun SplashScreenPreview(){
     SplashScreen(
+        SplashViewModel(),
         rememberNavController()
     )
 }
 
 @Composable
-public fun SplashScreen(navController: NavHostController){
+public fun SplashScreen(
+    viewModel: SplashViewModel,
+    navController: NavHostController){
     //val caslonFont = FontFamily(Font(R.font.caslon_classico_sc_regular))
 
+    val context = LocalContext.current
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -59,7 +65,8 @@ public fun SplashScreen(navController: NavHostController){
         }
     }
 
-    Handler().postDelayed({
-        navController.navigate("/login")
-    }, 2000)
+    viewModel.checkUser(context, navController)
+    //Handler().postDelayed({
+    //    navController.navigate("/login")
+    //}, 2000)
 }

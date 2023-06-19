@@ -1,14 +1,13 @@
 package pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.viewmodels
 
 import android.content.Context
-import android.content.Intent
 import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import pe.edu.grupo3_asignacion1.activities.AppActivity
-import pe.edu.grupo3_asignacion1.models.User
+import pe.edu.grupo3_asignacion1.models.beans.User
 import pe.edu.grupo3_asignacion1.services.UserService
+import pe.edu.grupo3_asignacion1.services.UserService2
 
 class ProfileEditViewModel: ViewModel() {
     private val _id = MutableLiveData(0)
@@ -72,7 +71,7 @@ class ProfileEditViewModel: ViewModel() {
     }
 
     fun getUser(id: Int){
-        val user: User = UserService.fetchOne(id)
+        val user: User = UserService2.fetchOne(id)
         if(user != null){
             this.updateUser(user.usuario)
             this.updateName(user.nombre)
@@ -83,11 +82,11 @@ class ProfileEditViewModel: ViewModel() {
     }
 
     fun validar(context: Context){
-        val message: String = UserService.existData(mail.value!!,user.value!!,id.value!!)
+        val message: String = UserService2.existData(mail.value!!,user.value!!,id.value!!)
         if(message != "OK"){
             updateMensaje("Error: $message")
         }else{
-            UserService.updateUser(id.value!!,name.value!!,user.value!!,mail.value!!)
+            UserService2.updateUser(id.value!!,name.value!!,user.value!!,mail.value!!)
             updateMensaje("Perfil Editado")
         }
         Handler().postDelayed({
@@ -97,7 +96,7 @@ class ProfileEditViewModel: ViewModel() {
 
     fun validarChangePassword(context: Context) {
         var message: String = "Contraseña Cambiada"
-        val res: Boolean = UserService.validatePassword(id.value!!, password.value!!)
+        val res: Boolean = UserService2.validatePassword(id.value!!, password.value!!)
         if(!res){
             message = "Error: Contraseña antigua no coincide"
         }
@@ -106,7 +105,7 @@ class ProfileEditViewModel: ViewModel() {
         }
         updateMensajePassword(message)
         if(!message.contains("Error")){
-            UserService.updatePassword(id.value!!,newPassword.value!!)
+            UserService2.updatePassword(id.value!!,newPassword.value!!)
             updatePassword("")
             updateNewPassword("")
             updateNewPasswordConfirm("")
