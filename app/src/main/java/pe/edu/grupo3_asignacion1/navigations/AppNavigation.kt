@@ -109,7 +109,8 @@ fun AppNavigation(
                 }
             )
         ){
-            profileEditViewModel.getUser(userId!!)
+            val context = LocalContext.current
+            profileEditViewModel.getUser(context,userId!!)
             ProfileEditScreen(viewModel = profileEditViewModel)
         }
     }

@@ -1,4 +1,4 @@
-package pe.edu.grupo3_asignacion1.models.beans
+package pe.edu.grupo3_asignacion1.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -17,7 +17,7 @@ data class User (
     var contrasenia: String = "",
     @SerializedName("name")
     @ColumnInfo("name")
-    var nombre: String = "",
+    var nombre: String? = "",
     @SerializedName("email")
     @ColumnInfo("email")
     var correo: String = "",

@@ -230,7 +230,7 @@ public fun ProfileEditScreen(
                     )
                 }
                 Button(
-                    onClick = { viewModel.validarChangePassword(context) },
+                    onClick = { viewModel.changePassword(context) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 5.dp),
@@ -370,7 +370,7 @@ public fun ProfileEditScreen(
                     }
 
                     Button(
-                        onClick = { viewModel.validar(context) },
+                        onClick = { viewModel.UpdateUser(context) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 5.dp),
