@@ -97,7 +97,7 @@ fun LoginNavigation(
             PerfilScreen(
                 viewModel = PerfilViewModel(),
                 navController,
-                0
+                1
             )
         }
         //Navegación de la pantalla Login

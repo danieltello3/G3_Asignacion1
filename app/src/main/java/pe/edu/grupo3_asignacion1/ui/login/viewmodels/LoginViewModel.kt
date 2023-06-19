@@ -63,15 +63,13 @@ class LoginViewModel(): ViewModel() {
                         val user: User = response.body()!!
                         val database = LocalDB.getDatabase(context)
                         val userDao = database.userDao()
-                        updateMensaje("Todo OK")
-
                         userDao.deleteAll()
                         userDao.insert(user)
                         updateMensaje("Usuario OK")
 
                         withContext(Dispatchers.Main) {
                             updateMensaje("")
-                            navController.navigate("/")
+                            navController.navigate("/profile/")
                         }
 
                     }else if(response.code() == 500){

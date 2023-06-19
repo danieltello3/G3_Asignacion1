@@ -2,6 +2,7 @@ package pe.edu.grupo3_asignacion1.ui.login.viewmodels
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,16 +20,19 @@ class SplashViewModel: ViewModel() {
                     val database = LocalDB.getDatabase(context)
                     val userDao = database.userDao()
                     val userCount: Int? = userDao.getUserCount()
-                    if (userCount != 0) {
+                    if (userCount == 0) {
+                        // no hay un usuario en db
+                        Log.d("TAGSPLASH","INGRESA A LOGIN")
+                        withContext(Dispatchers.Main) {
+                            navController.navigate("/login")
+                        }
+
+                    } else {
                         // hay un usuario en db
                         withContext(Dispatchers.Main) {
                             navController.navigate("/profile")
                         }
-                    } else {
-                        // no hay un usuario en db
-                        withContext(Dispatchers.Main) {
-                            navController.navigate("/login")
-                        }
+
                     }
                 }
             } catch (e: Exception) {
@@ -37,7 +41,7 @@ class SplashViewModel: ViewModel() {
                 activity.runOnUiThread {
                     Toast.makeText(
                         activity,
-                        "Error, No se validar si hay alguien logueado",
+                        "Error, No se pudo validar si hay alguien logueado",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
