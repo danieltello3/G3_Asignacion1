@@ -1,7 +1,9 @@
 package pe.edu.grupo3_asignacion1.navigations
 
+import android.app.Activity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -22,6 +24,8 @@ fun AppNavigation(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val indexId = navBackStackEntry?.arguments?.getInt("index_id")
     val userId = navBackStackEntry?.arguments?.getInt("user_id")
+    val context = LocalContext.current
+    val activity = context as Activity
 
     NavHost(
         navController = navController,
@@ -56,13 +60,13 @@ fun AppNavigation(
         composable(
             route = "/profile/",
         ){
-            perfilViewModel.setUsuario(1)
-            followViewModel.setFollowings(1)
-            followViewModel.setFollowers(1)
-            imagesViewModel.setImages(1)
+            perfilViewModel.setUsuarioLocal(context)
+            followViewModel.setFollowings(perfilViewModel.id.value!!)
+            followViewModel.setFollowers(perfilViewModel.id.value!!)
+            imagesViewModel.setImages(perfilViewModel.id.value!!)
             PerfilScreen(
                 navController,
-                1,
+                perfilViewModel.id.value!!,
                 perfilViewModel,
                 followViewModel,
                 imagesViewModel,

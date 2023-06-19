@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface ImageService{
     @GET("/user/pokemon")
-    fun fetchImageByUserId(
+     fun fetchImageByUserId(
         @Query("id") id : Int
     ): Call<PhotoList>
 }

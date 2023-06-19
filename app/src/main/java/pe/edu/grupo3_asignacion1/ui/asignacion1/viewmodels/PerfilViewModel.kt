@@ -1,10 +1,18 @@
 package pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels
 
+import android.app.Activity
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pe.edu.grupo3_asignacion1.configs.BackendClient
+import pe.edu.grupo3_asignacion1.configs.LocalDB
 import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.services.UserService
 import kotlin.concurrent.thread
@@ -63,6 +71,35 @@ class PerfilViewModel: ViewModel() {
 
             } catch (e: Exception) {
                 e.printStackTrace()
+            }
+        }
+    }
+
+    fun setUsuarioLocal(context: Context){
+        val _this = this
+        viewModelScope.launch{
+            try {
+                withContext(Dispatchers.IO) {
+                    val database = LocalDB.getDatabase(context)
+                    val userDao = database.userDao()
+                    val usuario: User = userDao.getUser()!!
+                    _this.updateId(usuario!!.id)
+                    _this.updateUsuario(usuario!!.usuario)
+                    _this.updateCorreo(usuario!!.correo)
+                    _this.updateNombre(usuario!!.nombre)
+                    _this.updateImagen(usuario!!.imagen)
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                val activity = context as Activity
+                activity.runOnUiThread{
+                    Toast.makeText(
+                        activity,
+                        "Error: No se pudo mostrar el usuario",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
