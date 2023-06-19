@@ -22,8 +22,8 @@ import pe.edu.grupo3_asignacion1.models.requests.UserUpdate
 import pe.edu.grupo3_asignacion1.models.requests.UserValidate
 import pe.edu.grupo3_asignacion1.services.IUserService
 import pe.edu.grupo3_asignacion1.services.UserService
-import pe.edu.ulima.dbaccess.configs.BackendClient
-import pe.edu.ulima.dbaccess.configs.LocalDB
+import pe.edu.grupo3_asignacion1.configs.BackendClient
+import pe.edu.grupo3_asignacion1.configs.LocalDB
 
 class ProfileEditViewModel: ViewModel() {
     private val _id = MutableLiveData(0)

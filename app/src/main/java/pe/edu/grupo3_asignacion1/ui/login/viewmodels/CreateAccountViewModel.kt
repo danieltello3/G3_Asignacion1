@@ -1,12 +1,22 @@
+/*
 package pe.edu.grupo3_asignacion1.ui.login.viewmodels
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pe.edu.grupo3_asignacion1.activities.AppActivity
+import pe.edu.grupo3_asignacion1.configs.BackendClient
+import pe.edu.grupo3_asignacion1.models.beans.User
+import pe.edu.grupo3_asignacion1.models.requests.UserCreate
 import pe.edu.grupo3_asignacion1.services.UserService
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -43,52 +53,73 @@ class CreateAccountViewModel : ViewModel(){
     }
 
     fun createNewAccount(context: Context){
+        //para llamar a backend (bd remota)
+        val apiService = BackendClient.buildService(UserService::class.java)
         //Para validacion del correo
         val pattern: Pattern = Pattern.compile(".+@.+\\.[a-z]+")
         val email = correo.value
         val matcher: Matcher = pattern.matcher(email)
         val matchFound: Boolean = matcher.matches()
-
-        //Para validacion de usuario
-        if(usuario.value!! != "" && contrasenia.value!! != "" && correo.value!! != "" && repeatcontrasenia.value!! != ""){
-            //Si es que no son nulas las casillas
-            val bool = UserService.verifyIfUserAlreadyExists(usuario.value!!)
-            if(bool){
-                updateMensaje("Error:El usuario ingresado ya existe.")
-            }else{
-                if(matchFound){
-                    //Validar si el correo ya existe
-                    val bool2 =UserService.verifyIfEmailAlreadyExists(correo.value!!)
-                    if(bool2){
-                        updateMensaje("Error:El correo ingresado ya se encuentra registrado.")
-                    }else{
-                        //Para coincidencia de contraseñas
-                        if(contrasenia.value!! != repeatcontrasenia.value!!){
-                            updateMensaje("Error:Las contraseñas deben ser iguales")
+        viewModelScope.launch {
+            try{
+                withContext(Dispatchers.IO){
+                    //Para validacion de usuario
+                    if(usuario.value!! != "" && contrasenia.value!! != "" && correo.value!! != "" && repeatcontrasenia.value!! != ""){
+                        //Si es que no son nulas las casillas
+                        val response = apiService.getUserName(usuario.value!!)
+                        //val bool = UserService.verifyIfUserAlreadyExists(usuario.value!!)
+                        if(response.code()==200){
+                            updateMensaje("El usuario ingresado ya existe.")
                         }else{
-                            //Todo bien, todo correcto
-                            updateMensaje("Todo OK")
-                            val id = UserService.create(usuario.value!!,contrasenia.value!!,correo.value!!)
-                            //Ingresar lógica de ir a la página de Home
-                            Handler().postDelayed({
-                                updateMensaje("")
-                                val appActivity =  Intent(context, AppActivity::class.java)
-                                appActivity.putExtra("user_id", id)
-                                context.startActivity(
-                                    appActivity
-                                )
-                            }, 1000)
+                            if(matchFound){
+                                //Validar si el correo ya existe
+                                val response2 = apiService.getEmail(correo.value!!)
+                                if(response2.code()==200){
+                                    updateMensaje("El correo ingresado ya se encuentra registrado.")
+                                }else{
+                                    //Para coincidencia de contraseñas
+                                    if(contrasenia.value!! != repeatcontrasenia.value!!){
+                                        updateMensaje("Las contraseñas deben ser iguales")
+                                    }else{
+                                        //Todo bien, todo correcto
+                                        updateMensaje("Todo OK")
+                                        val userCreate : UserCreate = UserCreate(usuario.value!!,contrasenia.value!!,correo.value!!)
+                                        val response3 =  apiService.createAccount(userCreate)
+                                        val user: User = response3.body()!!
+                                        //Ingresar lógica de ir a la página de Home
+                                        Handler().postDelayed({
+                                            updateMensaje("")
+                                            val appActivity =  Intent(context, AppActivity::class.java)
+                                            appActivity.putExtra("user_id",user.id)
+                                            context.startActivity(
+                                                appActivity
+                                            )
+                                        }, 1000)
+                                    }
+                                }
+                            }else{
+                                updateMensaje("Error: Ingrese un correo válido")
+                            }
                         }
+                    }else{
+                        updateMensaje("Complete todas las casillas")
                     }
-                }else{
-                    updateMensaje("Error:Ingrese un correo válido")
+
                 }
             }
-        }else{
-            updateMensaje("Error:Complete todas las casillas")
+            catch(e: Exception){
+                val activity = context as Activity
+                activity.runOnUiThread {
+                    Toast.makeText(
+                        activity,
+                        "Error, no se pudo crear el usuario",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
 
 
 
     }
-}
+}*/

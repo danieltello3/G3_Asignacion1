@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.FollowerScreen
 import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.FollowingScreen
 import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.FollowViewModel
+import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.PerfilViewModel
 import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.TabViewModel
 
 @Preview
@@ -28,6 +29,7 @@ fun FollowScreenPreview(){
     FollowScreen(
         FollowViewModel(),
         TabViewModel(),
+        PerfilViewModel(),
         rememberNavController()
     )
 }
@@ -36,6 +38,7 @@ fun FollowScreenPreview(){
 fun FollowScreen(
     viewModel: FollowViewModel,
     tabViewModel: TabViewModel,
+    perfilViewModel: PerfilViewModel,
     navController: NavController
 ){
     Scaffold (topBar = {
@@ -45,7 +48,7 @@ fun FollowScreen(
                 Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back")
             }
         },
-        title = { Text(text = viewModel.user.value.toString(), modifier = Modifier.padding(end = 5.dp)) },
+        title = { Text(text = perfilViewModel.nombre.value!!, modifier = Modifier.padding(end = 5.dp)) },
     )
     }) {
         Box(

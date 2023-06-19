@@ -22,6 +22,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import pe.edu.grupo3_asignacion1.models.Follows
 import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.FollowViewModel
 
@@ -45,14 +46,13 @@ fun FollowingScreen(
         columns = GridCells.Fixed(1),
         content = {
             items(viewModel.followings!!.size) { i ->
-                val user: User = viewModel.followings!![i]
                 Row(modifier = Modifier
                     .fillMaxWidth()
                     .clickable {
-                        navController.navigate("/profile/?user_id=${user.id}")
+                        navController.navigate("/profile/?user_id=${viewModel.followings!![i].usuarioId}")
                     }) {
                     Image(
-                        painter = rememberImagePainter(data = user.imagen),
+                        painter = rememberImagePainter(data = viewModel.followings!![i].imageUrl),
                         contentDescription = "XD",
                         modifier = Modifier
                             .size(80.dp)
@@ -64,14 +64,14 @@ fun FollowingScreen(
                     )
                     Column(modifier = Modifier.align(Alignment.CenterVertically)){
                         Text(
-                            user.usuario,
+                            viewModel.followings!![i].user,
                             style = TextStyle(
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold
                             )
                         )
                         Text(
-                            user.nombre!!,
+                            viewModel.followings!![i].name,
                             style = TextStyle(
                                     fontSize = 15.sp,
                             fontWeight = FontWeight.Light

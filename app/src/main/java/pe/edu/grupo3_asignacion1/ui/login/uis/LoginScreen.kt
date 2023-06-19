@@ -1,3 +1,4 @@
+/*
 package pe.edu.grupo3_asignacion1.ui.login.uis
 
 import android.app.Activity
@@ -27,6 +28,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.ui.login.viewmodels.LoginViewModel
 import pe.edu.grupo3_asignacion1.ui.theme.*
@@ -37,7 +40,8 @@ public fun LoginScreenPreview(){
     LoginScreen(
         LoginViewModel(),
         goToResetPasswordScreen = {},
-        goToCreateAccountScreen = {}
+        goToCreateAccountScreen = {},
+        rememberNavController()
     )
 }
 
@@ -45,7 +49,9 @@ public fun LoginScreenPreview(){
 public fun LoginScreen(
     viewModel: LoginViewModel,
     goToResetPasswordScreen: () -> Unit,
-    goToCreateAccountScreen: () -> Unit
+    goToCreateAccountScreen: () -> Unit,
+    navController: NavHostController
+
 ){
     val context = LocalContext.current
     // viewmodel
@@ -176,9 +182,11 @@ public fun LoginScreen(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                    .padding(top = 15.dp*/
+/*, start = 40.dp, end = 40.dp*//*
+), // start -> izquierda, end -> derecha
                 onClick = {
-                    viewModel.validar(context)
+                    viewModel.validar(context,navController)
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = OrangeUL)
             ){
@@ -189,7 +197,9 @@ public fun LoginScreen(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 1.dp, /*start = 40.dp, end = 40.dp*/),
+                    .padding(top = 1.dp, */
+/*start = 40.dp, end = 40.dp*//*
+),
                 onClick = {
 
                 },
@@ -247,4 +257,4 @@ public fun LoginScreen(
             }
         }
     }
-}
+}*/
