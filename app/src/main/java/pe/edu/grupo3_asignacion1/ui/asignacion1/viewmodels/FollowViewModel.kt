@@ -4,9 +4,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import pe.edu.grupo3_asignacion1.models.User
+import pe.edu.grupo3_asignacion1.models.beans.User
 import pe.edu.grupo3_asignacion1.services.FollowerService
 import pe.edu.grupo3_asignacion1.services.UserService
+import pe.edu.grupo3_asignacion1.services.UserService2
 
 class FollowViewModel: ViewModel() {
     private val _id = MutableLiveData(0)
@@ -26,7 +27,7 @@ class FollowViewModel: ViewModel() {
     )
     val followers get() = _followers.value
     fun setFollowers(userId: Int) {
-        _user.value = UserService.fetchOne(userId).usuario
+        _user.value = UserService2.fetchOne(userId).usuario
         _followers.value = FollowerService.fetchFollowers(userId)
     }
     private val _followings = mutableStateOf<List<User>?>(
@@ -34,7 +35,7 @@ class FollowViewModel: ViewModel() {
     )
     val followings get() = _followings.value
     fun setFollowings(userId: Int) {
-        _user.value = UserService.fetchOne(userId).usuario
+        _user.value = UserService2.fetchOne(userId).usuario
         _followings.value = FollowerService.fetchFollowings(userId)
     }
 }

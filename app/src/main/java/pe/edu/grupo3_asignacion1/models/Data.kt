@@ -1,5 +1,7 @@
 package pe.edu.grupo3_asignacion1.models
 
+import pe.edu.grupo3_asignacion1.models.beans.Photo
+
 val PhotoList = listOf<Photo>(
     Photo(1,"https://images.pexels.com/photos/16407235/pexels-photo-16407235.jpeg",1,"image1"),
     Photo(2,"https://images.pexels.com/photos/15561915/pexels-photo-15561915.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",1,"image2"),

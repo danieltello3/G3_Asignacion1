@@ -4,7 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import pe.edu.grupo3_asignacion1.models.Photo
+import pe.edu.grupo3_asignacion1.models.beans.Photo
 import pe.edu.grupo3_asignacion1.services.ImageService
 
 class PerfilViewModel: ViewModel() {

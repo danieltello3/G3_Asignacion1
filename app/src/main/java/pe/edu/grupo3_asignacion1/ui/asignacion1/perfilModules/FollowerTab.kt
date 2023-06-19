@@ -22,7 +22,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-import pe.edu.grupo3_asignacion1.models.User
+import pe.edu.grupo3_asignacion1.models.beans.User
 import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.FollowViewModel
 
 @Preview
