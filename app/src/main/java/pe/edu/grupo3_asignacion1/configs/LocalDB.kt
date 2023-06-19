@@ -9,7 +9,6 @@ import pe.edu.grupo3_asignacion1.daos.ProfileKeyDao
 import pe.edu.grupo3_asignacion1.daos.UserDao
 import pe.edu.grupo3_asignacion1.models.Photo
 import pe.edu.grupo3_asignacion1.models.ProfileKey
-import pe.edu.grupo3_asignacion1.models.User
 
 @Database(
     entities = [

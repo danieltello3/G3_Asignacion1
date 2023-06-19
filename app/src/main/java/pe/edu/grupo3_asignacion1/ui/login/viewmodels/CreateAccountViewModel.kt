@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pe.edu.grupo3_asignacion1.activities.AppActivity
 import pe.edu.grupo3_asignacion1.configs.BackendClient
-import pe.edu.grupo3_asignacion1.models.beans.User
+import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.models.requests.UserCreate
 import pe.edu.grupo3_asignacion1.services.UserService
 import java.util.regex.Matcher

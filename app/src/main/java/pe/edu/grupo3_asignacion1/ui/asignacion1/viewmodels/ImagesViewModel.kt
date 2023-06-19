@@ -12,10 +12,8 @@ import kotlinx.coroutines.withContext
 import pe.edu.grupo3_asignacion1.configs.BackendClient
 import pe.edu.grupo3_asignacion1.configs.LocalDB
 import pe.edu.grupo3_asignacion1.daos.ProfileKeyDao
-import pe.edu.grupo3_asignacion1.daos.UserDao
 import pe.edu.grupo3_asignacion1.models.Photo
 import pe.edu.grupo3_asignacion1.models.ProfileKey
-import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.services.ImageService
 import kotlin.concurrent.thread
 

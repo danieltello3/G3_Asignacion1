@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.*
 import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.FollowViewModel
@@ -30,7 +30,7 @@ fun PerfilScreenPreview(){
 //@Preview(showBackground = true)
 @Composable
 fun PerfilScreen(
-    navController: NavController,
+    navController: NavHostController,
     userId: Int,
     perfilViewModel: PerfilViewModel,
     followViewModel: FollowViewModel,

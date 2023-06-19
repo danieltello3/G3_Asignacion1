@@ -2,8 +2,6 @@ package pe.edu.grupo3_asignacion1.ui.login.viewmodels
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -14,10 +12,9 @@ import androidx.navigation.NavHostController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import pe.edu.grupo3_asignacion1.activities.AppActivity
 import pe.edu.grupo3_asignacion1.configs.BackendClient
 import pe.edu.grupo3_asignacion1.configs.LocalDB
-import pe.edu.grupo3_asignacion1.models.beans.User
+import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.models.requests.UserValidate
 import pe.edu.grupo3_asignacion1.services.UserService
 

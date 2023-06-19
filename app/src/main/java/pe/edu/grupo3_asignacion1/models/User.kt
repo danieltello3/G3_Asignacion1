@@ -1,4 +1,4 @@
-package pe.edu.grupo3_asignacion1.models.beans
+package pe.edu.grupo3_asignacion1.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

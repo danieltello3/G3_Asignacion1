@@ -1,6 +1,6 @@
 package pe.edu.grupo3_asignacion1.services
 
-import pe.edu.grupo3_asignacion1.models.beans.User
+import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.models.requests.*
 import retrofit2.Call
 import retrofit2.Response

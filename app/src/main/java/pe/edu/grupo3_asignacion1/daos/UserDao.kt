@@ -1,7 +1,6 @@
 package pe.edu.grupo3_asignacion1.daos
 
 import androidx.room.*
-import pe.edu.grupo3_asignacion1.models.User
 
 @Dao
 interface UserDao {

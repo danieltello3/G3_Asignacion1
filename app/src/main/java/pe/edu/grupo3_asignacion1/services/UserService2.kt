@@ -1,11 +1,6 @@
 package pe.edu.grupo3_asignacion1.services
 
-import androidx.compose.ui.text.toLowerCase
-import pe.edu.grupo3_asignacion1.models.beans.User
-import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.FollowViewModel
-import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.POST
+import pe.edu.grupo3_asignacion1.models.User
 
 class UserService2 {
     companion object {
@@ -43,7 +38,7 @@ class UserService2 {
 
         }
 
-        fun fetchOne(id: Int): User{
+        fun fetchOne(id: Int): User {
             var user = User()
             for(u in users){
                 if(u.id == id){

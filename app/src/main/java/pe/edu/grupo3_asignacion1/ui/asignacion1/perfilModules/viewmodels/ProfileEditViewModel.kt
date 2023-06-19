@@ -5,8 +5,7 @@ import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import pe.edu.grupo3_asignacion1.models.beans.User
-import pe.edu.grupo3_asignacion1.services.UserService
+import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.services.UserService2
 
 class ProfileEditViewModel: ViewModel() {
