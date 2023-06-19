@@ -24,6 +24,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.ui.login.viewmodels.CreateAccountViewModel
 import pe.edu.grupo3_asignacion1.ui.theme.GrayUL
@@ -36,13 +38,15 @@ public fun CreateAccountScreenPreview(){
     CreateAccountScreen(
         CreateAccountViewModel(),
         goToResetPasswordScreen = {},
-        goToLoginScreen = {})
+        goToLoginScreen = {},
+        rememberNavController())
 }
 
 @Composable
 public fun CreateAccountScreen(viewModel: CreateAccountViewModel,
                                goToResetPasswordScreen: () -> Unit,
-                               goToLoginScreen: () -> Unit
+                               goToLoginScreen: () -> Unit,
+                               navController: NavHostController
 ){
     val context = LocalContext.current as Activity
 
@@ -169,7 +173,7 @@ public fun CreateAccountScreen(viewModel: CreateAccountViewModel,
                     .padding(top = 15.dp),
                 onClick = {
                     //Lógica para crear nueva cuenta
-                    viewModel.createNewAccount(context)
+                    viewModel.createNewAccount(context,navController)
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = OrangeUL)
             ) {

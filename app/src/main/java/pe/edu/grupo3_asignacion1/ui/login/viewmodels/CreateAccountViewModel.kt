@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavHostController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -52,7 +53,7 @@ class CreateAccountViewModel : ViewModel(){
         _mensaje.postValue(it)
     }
 
-    fun createNewAccount(context: Context){
+    fun createNewAccount(context: Context, navController: NavHostController){
         //para llamar a backend (bd remota)
         val apiService = BackendClient.buildService(UserService::class.java)
         //Para validacion del correo
@@ -87,14 +88,15 @@ class CreateAccountViewModel : ViewModel(){
                                         val response3 =  apiService.createAccount(userCreate)
                                         val user: User = response3.body()!!
                                         //Ingresar lógica de ir a la página de Home
-                                        Handler().postDelayed({
-                                            updateMensaje("")
-                                            val appActivity =  Intent(context, AppActivity::class.java)
-                                            appActivity.putExtra("user_id",user.id)
-                                            context.startActivity(
-                                                appActivity
-                                            )
-                                        }, 1000)
+                                        updateMensaje("")
+//                                        val appActivity =  Intent(context, AppActivity::class.java)
+//                                        appActivity.putExtra("user_id",user.id)
+//                                        context.startActivity(
+//                                            appActivity
+//                                        )
+                                        withContext(Dispatchers.Main){
+                                            navController.navigate("/login")
+                                        }
                                     }
                                 }
                             }else{

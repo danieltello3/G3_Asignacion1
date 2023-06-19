@@ -23,24 +23,22 @@ class SplashViewModel: ViewModel() {
                     val database = LocalDB.getDatabase(context)
                     val userDao = database.userDao()
                     val userCount: User? = userDao.getUser()
-                    if (userCount == null) {
-                        // no hay un usuario en db
-                        Log.d("TAGSPLASH","INGRESA A LOGIN")
-                        withContext(Dispatchers.Main) {
-                            navController.navigate("/login")
-                        }
 
-                    } else {
-                        // hay un usuario en db
-                        withContext(Dispatchers.Main) {
+                        if (userCount == null) {
+                            // no hay un usuario en db
+                            Log.d("TAGSPLASH","INGRESA A LOGIN")
+
+                        } else {
+                            // hay un usuario en db
+                            withContext(Dispatchers.Main){
                             //navController.navigate("/profile")
                             val appActivity =  Intent(context, AppActivity::class.java)
                             context.startActivity(
                                 appActivity
                             )
+                            }
                         }
 
-                    }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

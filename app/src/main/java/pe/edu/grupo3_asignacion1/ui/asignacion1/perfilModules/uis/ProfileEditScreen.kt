@@ -395,6 +395,19 @@ public fun ProfileEditScreen(
                             text = "CAMBIAR CONTRASEÑA"
                         )
                     }
+                    Button(
+                        onClick = { viewModel.cerrarSesión(context) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 5.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = OrangeUL
+                        )
+                    ) {
+                        Text(
+                            text = "CERRAR SESIÓN"
+                        )
+                    }
                 }
             }
         }

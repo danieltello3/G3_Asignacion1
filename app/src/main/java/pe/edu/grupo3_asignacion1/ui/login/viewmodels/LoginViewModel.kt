@@ -61,6 +61,7 @@ class LoginViewModel(): ViewModel() {
                     if (response.code() == 200){
                         //Log.d("TAG.",response.body().toString())
                         val user: User = response.body()!!
+                        Log.d("USER",user.toString())
                         val database = LocalDB.getDatabase(context)
                         val userDao = database.userDao()
                         userDao.deleteAll()

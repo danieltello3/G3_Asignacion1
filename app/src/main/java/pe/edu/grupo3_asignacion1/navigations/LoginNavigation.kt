@@ -37,18 +37,18 @@ fun LoginNavigation(
 
     NavHost(
         navController = navController,
-        startDestination = "/"
+        startDestination = "/login"
     ){
-        composable(
-            route = "/splash",
-            arguments = listOf(
-            )
-        ){
-            SplashScreen(
-                viewModel = SplashViewModel(),
-                navController
-            )
-        }
+//        composable(
+//            route = "/splash",
+//            arguments = listOf(
+//            )
+//        ){
+//            SplashScreen(
+//                viewModel = SplashViewModel(),
+//                navController
+//            )
+//        }
         /*
         composable(
             route = "/login/{parameter}?optionalParameter={optionalParameter}",
@@ -116,7 +116,6 @@ fun LoginNavigation(
                     navController.navigate("/create_account")
                 },
                 navController
-
             )
         }
 
@@ -125,7 +124,7 @@ fun LoginNavigation(
             route = "/",
             arguments = listOf()
         ){ entry ->
-
+            Log.d("/","ENTRA AQUI")
             SplashScreen(
                 viewModel = SplashViewModel(),
                 navController
@@ -163,7 +162,8 @@ fun LoginNavigation(
                 },
                 goToLoginScreen = {
                     navController.navigate("/login")
-                }
+                },
+                navController
             )
 
         }

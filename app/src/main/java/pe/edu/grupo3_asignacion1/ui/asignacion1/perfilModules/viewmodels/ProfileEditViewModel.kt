@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pe.edu.grupo3_asignacion1.activities.AppActivity
+import pe.edu.grupo3_asignacion1.activities.MainActivity
 import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.models.requests.PasswordUpdate
 import pe.edu.grupo3_asignacion1.models.requests.PasswordValidate
@@ -260,5 +261,42 @@ class ProfileEditViewModel: ViewModel() {
         this.updateName("")
         this.updateMail("")
         this.updateUrl("")
+    }
+
+    fun cerrarSesión(context: Context) {
+        viewModelScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    Log.v("GET USER", "entra")
+                    val database = LocalDB.getDatabase(context)
+                    val userDao = database.userDao()
+                    val photoDao = database.photoDao()
+                    val profileKey = database.profileKeyDao()
+
+                    userDao.deleteAll()
+                    photoDao.deleteAllPhotos()
+                    profileKey.deleteAllProfileKeys()
+
+                    withContext(Dispatchers.Main) {
+                        updateMensaje("")
+                        val mainActivity = Intent(context, MainActivity::class.java)
+                        context.startActivity(
+                            mainActivity
+                        )
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.v("GET USER", e.message.toString())
+                val activity: Activity = context as Activity
+                activity.runOnUiThread {
+                    Toast.makeText(
+                        activity,
+                        "Error, No se puede cerrar sesión",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
 }

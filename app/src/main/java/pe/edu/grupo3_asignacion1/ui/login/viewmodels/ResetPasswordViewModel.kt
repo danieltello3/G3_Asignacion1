@@ -49,7 +49,7 @@ class ResetPasswordViewModel:ViewModel(){
                         val matchFound: Boolean = matcher.matches()
                         //Validar si tiene formato de correo
                         if (matchFound){
-                            val response = apiService.getUserName(correo.value!!)
+                            val response = apiService.getEmail(correo.value!!)
                             //val bool = UserService.verifyIfUserAlreadyExists(usuario.value!!)
                             if(response.code()==200){
                                 updateMensaje("Se envió correo para recuperar contrasenia.")

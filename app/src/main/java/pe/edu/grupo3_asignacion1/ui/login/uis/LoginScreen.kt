@@ -32,6 +32,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import pe.edu.grupo3_asignacion1.R
 import pe.edu.grupo3_asignacion1.ui.login.viewmodels.LoginViewModel
+import pe.edu.grupo3_asignacion1.ui.login.viewmodels.SplashViewModel
 import pe.edu.grupo3_asignacion1.ui.theme.*
 
 @Preview
@@ -59,23 +60,28 @@ public fun LoginScreen(
     val contrasenia : String by viewModel.contrasenia.observeAsState(initial = "")
     val mensaje : String by viewModel.mensaje.observeAsState(initial = "")
     val passwordVisible = remember { mutableStateOf(false) }
+    val splashViewModel = SplashViewModel()
+
+    splashViewModel.checkUser(context,navController)
+
+    Log.d("LOGIN SCREEN","ENTRA")
 
     // close
-    Box(modifier = Modifier.fillMaxSize()) {
-        IconButton(
-            onClick = {
-                Log.d("LOGIN_SCREEN", "XDDDDDDDDDDDDDDDDDDD")
-                val activity = context as Activity
-                activity.finish()
-            },
-            modifier = Modifier.align(Alignment.TopEnd).padding(10.dp)
-        ){
-            Icon(
-                imageVector = Icons.Default.Close,
-                contentDescription = "Person Icon",
-            )
-        }
-    }
+//    Box(modifier = Modifier.fillMaxSize()) {
+//        IconButton(
+//            onClick = {
+//                Log.d("LOGIN_SCREEN", "XDDDDDDDDDDDDDDDDDDD")
+//                val activity = context as Activity
+//                activity.finish()
+//            },
+//            modifier = Modifier.align(Alignment.TopEnd).padding(10.dp)
+//        ){
+//            Icon(
+//                imageVector = Icons.Default.Close,
+//                contentDescription = "Person Icon",
+//            )
+//        }
+//    }
     // container
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -182,9 +188,9 @@ public fun LoginScreen(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 15.dp
-, //start = 40.dp, end = 40.dp
-), //start -> izquierda, end -> derecha
+                    .padding(top = 15.dp,
+                        //start = 40.dp, end = 40.dp
+                    ), //start -> izquierda, end -> derecha
                 onClick = {
                     viewModel.validar(context,navController)
                 },
@@ -198,8 +204,8 @@ public fun LoginScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 1.dp,
-//start = 40.dp, end = 40.dp
-),
+                    //start = 40.dp, end = 40.dp
+                    ),
                 onClick = {
 
                 },
