@@ -63,7 +63,7 @@ fun AppNavigation(
             perfilViewModel.setUsuarioLocal(context)
             followViewModel.setFollowings(perfilViewModel.id.value!!)
             followViewModel.setFollowers(perfilViewModel.id.value!!)
-            imagesViewModel.setImages(perfilViewModel.id.value!!)
+            imagesViewModel.uploadImages(activity)
             PerfilScreen(
                 navController,
                 perfilViewModel.id.value!!,
