@@ -2,6 +2,7 @@ package pe.edu.grupo3_asignacion1.services
 
 import pe.edu.grupo3_asignacion1.models.beans.User
 import pe.edu.grupo3_asignacion1.models.requests.*
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -22,6 +23,11 @@ interface UserService {
     suspend fun getUserName(
         @Query("usuario") usuario: String
     ): Response<User>
+
+    @GET("/user/fetch_one")
+    fun fetchOne(
+        @Query("id") id: Int
+    ): Call<User>
 
     @GET("/user/get_email")
     suspend fun getEmail(

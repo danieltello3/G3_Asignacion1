@@ -7,24 +7,26 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import pe.edu.grupo3_asignacion1.models.beans.User
+import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.services.UserService
-import pe.edu.grupo3_asignacion1.services.UserService2
+import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.PerfilViewModel
 
 @Composable
 fun PerfilNombre(
-    userId: Int
+    userId: Int,
+    viewModel: PerfilViewModel
 ){
-    var user: User = UserService2.fetchOne(userId)
 
     Row(){
         Text(
             modifier = Modifier.padding(bottom = 15.dp,start = 20.dp),
-            text = user.nombre,
+            text = viewModel.nombre.value!!,
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             color = if (isSystemInDarkTheme()) Color.White else Color.Black,

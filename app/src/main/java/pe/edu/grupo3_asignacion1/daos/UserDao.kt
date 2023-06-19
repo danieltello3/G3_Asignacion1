@@ -1,13 +1,11 @@
 package pe.edu.grupo3_asignacion1.daos
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import pe.edu.grupo3_asignacion1.models.beans.User
+import androidx.room.*
+import pe.edu.grupo3_asignacion1.models.User
 
 @Dao
 interface UserDao {
-    @Insert //Room: libreria para sqlite, manejo de escritura en la bd local
+    @Insert
     fun insert(user: User)
 
     @Query("DELETE FROM users")
@@ -18,7 +16,4 @@ interface UserDao {
 
     @Query("SELECT * FROM users LIMIT 1")
     suspend fun getUser(): User?
-
-
-
 }

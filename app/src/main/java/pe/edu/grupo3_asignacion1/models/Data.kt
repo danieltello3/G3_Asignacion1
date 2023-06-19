@@ -1,5 +1,6 @@
 package pe.edu.grupo3_asignacion1.models
 
+/*
 import pe.edu.grupo3_asignacion1.models.beans.Photo
 
 val PhotoList = listOf<Photo>(
@@ -13,4 +14,4 @@ val PhotoList = listOf<Photo>(
     Photo(8,"https://images.pexels.com/photos/15844493/pexels-photo-15844493.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",1,"image8"),
     Photo(9,"https://images.pexels.com/photos/4738517/pexels-photo-4738517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",1,"image9")
 
-)
+)*/

@@ -17,10 +17,6 @@ object BackendClient {
             .build();
     }
 
-    //val pokemonService: PokemonService by lazy {
-    //    retrofit.create(PokemonService::class.java)
-    //}
-
     fun <T> buildService(service: Class<T>): T{
         Log.d("TAG","Esta ingresando al buildService")
         return retrofit.create(service)

@@ -1,3 +1,4 @@
+/*
 package pe.edu.grupo3_asignacion1.ui.login.uis
 
 import android.app.Activity
@@ -181,7 +182,9 @@ public fun LoginScreen(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 15.dp/*, start = 40.dp, end = 40.dp*/), // start -> izquierda, end -> derecha
+                    .padding(top = 15.dp*/
+/*, start = 40.dp, end = 40.dp*//*
+), // start -> izquierda, end -> derecha
                 onClick = {
                     viewModel.validar(context,navController)
                 },
@@ -194,7 +197,9 @@ public fun LoginScreen(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 1.dp, /*start = 40.dp, end = 40.dp*/),
+                    .padding(top = 1.dp, */
+/*start = 40.dp, end = 40.dp*//*
+),
                 onClick = {
 
                 },
@@ -252,4 +257,4 @@ public fun LoginScreen(
             }
         }
     }
-}
+}*/
