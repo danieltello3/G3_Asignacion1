@@ -25,7 +25,7 @@ fun PerfilNombre(
     Row(){
         Text(
             modifier = Modifier.padding(bottom = 15.dp,start = 20.dp),
-            text = user.nombre,
+            text = user.nombre!!,
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             color = if (isSystemInDarkTheme()) Color.White else Color.Black,

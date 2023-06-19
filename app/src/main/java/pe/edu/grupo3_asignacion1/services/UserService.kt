@@ -2,6 +2,11 @@ package pe.edu.grupo3_asignacion1.services
 
 import androidx.compose.ui.text.toLowerCase
 import pe.edu.grupo3_asignacion1.models.User
+import pe.edu.grupo3_asignacion1.models.requests.UserUpdate
+import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.FollowViewModel
+import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.POST
 
 class UserService {
     companion object {

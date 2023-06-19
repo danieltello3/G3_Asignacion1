@@ -71,7 +71,7 @@ fun FollowingScreen(
                             )
                         )
                         Text(
-                            user.nombre,
+                            user.nombre!!,
                             style = TextStyle(
                                     fontSize = 15.sp,
                             fontWeight = FontWeight.Light

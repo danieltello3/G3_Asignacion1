@@ -1,14 +1,29 @@
 package pe.edu.grupo3_asignacion1.ui.asignacion1.perfilModules.viewmodels
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pe.edu.grupo3_asignacion1.activities.AppActivity
 import pe.edu.grupo3_asignacion1.models.User
+import pe.edu.grupo3_asignacion1.models.requests.PasswordUpdate
+import pe.edu.grupo3_asignacion1.models.requests.PasswordValidate
+import pe.edu.grupo3_asignacion1.models.requests.UserUpdate
+import pe.edu.grupo3_asignacion1.models.requests.UserValidate
+import pe.edu.grupo3_asignacion1.services.IUserService
 import pe.edu.grupo3_asignacion1.services.UserService
+import pe.edu.ulima.dbaccess.configs.BackendClient
+import pe.edu.ulima.dbaccess.configs.LocalDB
 
 class ProfileEditViewModel: ViewModel() {
     private val _id = MutableLiveData(0)
@@ -71,49 +86,173 @@ class ProfileEditViewModel: ViewModel() {
         _newPasswordConfirm.postValue(it)
     }
 
-    fun getUser(id: Int){
-        val user: User = UserService.fetchOne(id)
-        if(user != null){
-            this.updateUser(user.usuario)
-            this.updateName(user.nombre)
-            this.updateMail(user.correo)
-            this.updateUrl(user.imagen)
-            this.updateId(user.id)
+    fun getUser(context: Context, id: Int){
+        //val user: User = UserService.fetchOne(id)
+        viewModelScope.launch {
+            try{
+                withContext(Dispatchers.IO){
+                    Log.v("GET USER","entra")
+                    val database = LocalDB.getDatabase(context)
+                    val userDao = database.userDao()
+                    val user: User? = userDao.get(id)
+                    if(user != null){
+                        withContext(Dispatchers.Main){
+                            updateUser(user.usuario)
+                            updateName(user.nombre!!)
+                            updateMail(user.correo)
+                            updateUrl(user.imagen)
+                            updateId(user.id)
+                        }
+                    }
+                }
+            }catch (e: Exception){
+                e.printStackTrace()
+                Log.v("GET USER",e.message.toString())
+                val activity: Activity = context as Activity
+                activity.runOnUiThread {
+                    Toast.makeText(
+                        activity,
+                        "Error, No se obtener usuario de bd local",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+
+    }
+
+    //NEW EDITAR PERFIL
+    public fun UpdateUser(context: Context) {
+        viewModelScope.launch {
+            val apiService = BackendClient.buildService(IUserService::class.java)
+            val database = LocalDB.getDatabase(context)
+            val userDao = database.userDao()
+            try {
+                withContext(Dispatchers.IO) {
+                    val localRes = userDao.validateUser(id.value!!, user.value!!, mail.value!!)
+                    if (localRes == null) {
+                        val bodyValidate = UserValidate(id.value!!, user.value!!, mail.value!!)
+                        val serviceRes = apiService.validateUnique(bodyValidate)
+                        if (serviceRes.code() == 200) {
+                            if (serviceRes.body()?.status == "OK") {
+                                //Se actualiza en el Servidor
+                                val body =
+                                    UserUpdate(id.value!!, user.value!!, name.value!!, mail.value!!)
+                                val response = apiService.updateUser(body)
+                                if (response.code() == 200) {
+                                    //se actualiza en Local
+                                    val res = userDao.update(
+                                        id.value!!,
+                                        user.value!!,
+                                        name.value!!,
+                                        mail.value!!
+                                    )
+                                    if(res == 1){
+                                        updateMensaje("Perfil Editado")
+                                    }
+                                } else if (response.code() == 500) {
+                                    updateMensaje("Error:Usuario y contraseña no válidos")
+                                } else {
+                                    updateMensaje("Error:Ocurrió un error no esperado")
+                                }
+                            } else {
+                                updateMensaje(serviceRes.body()?.message!!)
+                            }
+                        } else if (serviceRes.code() == 500) {
+                            updateMensaje("Error:Error al actualizar usuario")
+                        } else {
+                            updateMensaje("Error:Ocurrió un error no esperado")
+                        }
+                    } else {
+                        if (localRes.usuario == user.value!!) {
+                            updateMensaje("Error:El usuario ya existe")
+                        } else if (localRes.correo == mail.value!!) {
+                            updateMensaje("Error:El correo ya existe")
+                        }
+                    }
+                    val activity = context as Activity
+                    activity.runOnUiThread {
+                        Handler().postDelayed({
+                            updateMensaje("")
+                        }, 2000)
+                    }
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                println("1 +++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+                Log.v("Exception", e.message!!)
+                println("2 +++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+                val activity = context as Activity
+                activity.runOnUiThread {
+                    Toast.makeText(
+                        activity,
+                        "Error, No se pudo validar el usuario",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
-    fun validar(context: Context){
-        val message: String = UserService.existData(mail.value!!,user.value!!,id.value!!)
-        if(message != "OK"){
-            updateMensaje("Error: $message")
-        }else{
-            UserService.updateUser(id.value!!,name.value!!,user.value!!,mail.value!!)
-            updateMensaje("Perfil Editado")
-        }
-        Handler().postDelayed({
-            updateMensaje("")
-        }, 1000)
-    }
+    // NEW CHANGE PASSWORD
+    public fun changePassword(context: Context){
+        viewModelScope.launch {
+            val apiService = BackendClient.buildService(IUserService::class.java)
+            val database = LocalDB.getDatabase(context)
+            val userDao = database.userDao()
+            try{
+                withContext(Dispatchers.IO){
+                    //VALIDACIONES
+                    val bodyValidate = PasswordValidate(id.value!!,password.value!!)
+                    val valResponse = apiService.validatePassword(bodyValidate)
+                    if(valResponse.code() == 200){
+                        if(valResponse.body()?.status == "OK"){
+                            if(newPassword.value != newPasswordConfirm.value){
+                                updateMensajePassword("Error: La nueva contraseña no coincide con confirmar contraseña")
+                            }else{
+                                //CAMBIO DE PASSWORD SERVIDOR
+                                val body = PasswordUpdate(id.value!!,newPassword.value!!)
+                                val response = apiService.updatePassword(body)
+                                if(response.code() == 200){
+                                    //CAMBIO DE PASSWORD LOCAL
+                                    val daoResponse = userDao.updatePassword(id.value!!,newPassword.value!!)
+                                    if(daoResponse == 1) {
+                                        updateMensajePassword("Contraseña actualizada")
+                                    }
+                                }else{
+                                    updateMensajePassword("Error: Ocurrió un error no esperado")
+                                }
+                            }
+                        }else{
+                            updateMensajePassword(valResponse.body()?.message!!)
+                        }
+                    }else{
+                        updateMensajePassword("Ocurrió un error no esperado")
+                    }
 
-    fun validarChangePassword(context: Context) {
-        var message: String = "Contraseña Cambiada"
-        val res: Boolean = UserService.validatePassword(id.value!!, password.value!!)
-        if(!res){
-            message = "Error: Contraseña antigua no coincide"
+                    val activity = context as Activity
+                    activity.runOnUiThread{
+                        Handler().postDelayed({
+                            updateMensajePassword("")
+                        }, 2000)
+                    }
+                }
+            }catch (e: Exception){
+                e.printStackTrace()
+                println("1 +++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+                Log.v("Exception",e.message!!)
+                println("2 +++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+                val activity = context as Activity
+                activity.runOnUiThread {
+                    Toast.makeText(
+                        activity,
+                        "Error, No se pudo cambiar la contraseña",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
-        if(newPassword.value != newPasswordConfirm.value){
-            message = "Error: La nueva contraseña no coincide con confirmar contraseña"
-        }
-        updateMensajePassword(message)
-        if(!message.contains("Error")){
-            UserService.updatePassword(id.value!!,newPassword.value!!)
-            updatePassword("")
-            updateNewPassword("")
-            updateNewPasswordConfirm("")
-        }
-        Handler().postDelayed({
-            updateMensajePassword("")
-        }, 1000)
     }
 
     fun unsetUser(){
