@@ -3,6 +3,7 @@ package pe.edu.grupo3_asignacion1.daos
 import androidx.room.*
 import pe.edu.grupo3_asignacion1.models.Photo
 
+@Dao
 interface PhotoDao {
     @Insert
     fun insertMany(pokemon: List<Photo>)

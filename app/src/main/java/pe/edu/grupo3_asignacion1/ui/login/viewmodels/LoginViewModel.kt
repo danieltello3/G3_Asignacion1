@@ -17,7 +17,7 @@ import kotlinx.coroutines.withContext
 import pe.edu.grupo3_asignacion1.activities.AppActivity
 import pe.edu.grupo3_asignacion1.configs.BackendClient
 import pe.edu.grupo3_asignacion1.configs.LocalDB
-import pe.edu.grupo3_asignacion1.models.beans.User
+import pe.edu.grupo3_asignacion1.models.User
 import pe.edu.grupo3_asignacion1.models.requests.UserValidate
 import pe.edu.grupo3_asignacion1.services.UserService
 
@@ -56,7 +56,7 @@ class LoginViewModel(): ViewModel() {
                 withContext(Dispatchers.IO){
                     Log.d("TAG.",usuario.value!!+" "+contrasenia.value!!)
                     //llamar a dataclass UserValidate. response = llama a la funcion validate de UserService
-                    val response = apiService.validate(UserValidate(usuario.value!!, contrasenia.value!!))
+                    val response = apiService.validate(UserValidate(user=usuario.value!!,password=contrasenia.value!!))
                     //Log.d("TAG.",response.toString())
                     if (response.code() == 200){
                         //Log.d("TAG.",response.body().toString())
@@ -69,7 +69,11 @@ class LoginViewModel(): ViewModel() {
 
                         withContext(Dispatchers.Main) {
                             updateMensaje("")
-                            navController.navigate("/profile/")
+                            //navController.navigate("/profile/")
+                            val appActivity =  Intent(context, AppActivity::class.java)
+                            context.startActivity(
+                                appActivity
+                            )
                         }
 
                     }else if(response.code() == 500){

@@ -17,7 +17,7 @@ data class User (
     var contrasenia: String = "",
     @SerializedName("name")
     @ColumnInfo("name")
-    var nombre: String? = "",
+    var nombre: String = "",
     @SerializedName("email")
     @ColumnInfo("email")
     var correo: String = "",

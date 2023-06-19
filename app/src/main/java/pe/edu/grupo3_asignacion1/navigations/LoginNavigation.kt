@@ -1,4 +1,4 @@
-/*
+
 package pe.edu.grupo3_asignacion1.navigations
 
 import android.util.Log
@@ -11,7 +11,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.PerfilScreen
-import pe.edu.grupo3_asignacion1.ui.asignacion1.uis.viewmodels.PerfilViewModel
+import pe.edu.grupo3_asignacion1.ui.asignacion1.viewmodels.PerfilViewModel
 import pe.edu.grupo3_asignacion1.ui.login.uis.CreateAccountScreen
 import pe.edu.grupo3_asignacion1.ui.login.uis.LoginScreen
 import pe.edu.grupo3_asignacion1.ui.login.uis.SplashScreen
@@ -90,17 +90,17 @@ fun LoginNavigation(
         }
         */
 
-        composable(
-            route="/profile",
-            arguments = listOf(
-            )
-        ){
-            PerfilScreen(
-                viewModel = PerfilViewModel(),
-                navController,
-                1
-            )
-        }
+//        composable(
+//            route="/profile",
+//            arguments = listOf(
+//            )
+//        ){
+//            PerfilScreen(
+//                viewModel = PerfilViewModel(),
+//                navController,
+//                1
+//            )
+//        }
         //Navegación de la pantalla Login
         composable(
             route = "/login",
@@ -168,4 +168,4 @@ fun LoginNavigation(
 
         }
     }
-}*/
+}

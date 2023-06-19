@@ -98,7 +98,7 @@ class ProfileEditViewModel: ViewModel() {
                     if(user != null){
                         withContext(Dispatchers.Main){
                             updateUser(user.usuario)
-                            updateName(user.nombre!!)
+                            updateName(user.nombre)
                             updateMail(user.correo)
                             updateUrl(user.imagen)
                             updateId(user.id)
