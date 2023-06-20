@@ -92,6 +92,7 @@ fun PerfilButtons(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     style= TextStyle(letterSpacing = -0.5.sp)
                 )

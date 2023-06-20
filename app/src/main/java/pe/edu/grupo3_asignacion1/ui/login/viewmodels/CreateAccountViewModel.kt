@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pe.edu.grupo3_asignacion1.activities.AppActivity
@@ -70,30 +71,25 @@ class CreateAccountViewModel : ViewModel(){
                         val response = apiService.getUserName(usuario.value!!)
                         //val bool = UserService.verifyIfUserAlreadyExists(usuario.value!!)
                         if(response.code()==200){
-                            updateMensaje("El usuario ingresado ya existe.")
+                            updateMensaje("Error: El usuario ingresado ya existe.")
                         }else{
                             if(matchFound){
                                 //Validar si el correo ya existe
                                 val response2 = apiService.getEmail(correo.value!!)
                                 if(response2.code()==200){
-                                    updateMensaje("El correo ingresado ya se encuentra registrado.")
+                                    updateMensaje("Error: El correo ingresado ya se encuentra registrado.")
                                 }else{
                                     //Para coincidencia de contraseñas
                                     if(contrasenia.value!! != repeatcontrasenia.value!!){
-                                        updateMensaje("Las contraseñas deben ser iguales")
+                                        updateMensaje("Error: Las contraseñas deben ser iguales")
                                     }else{
                                         //Todo bien, todo correcto
-                                        updateMensaje("Todo OK")
-                                        val userCreate : UserCreate = UserCreate(usuario.value!!,contrasenia.value!!,correo.value!!)
+                                        val userCreate : UserCreate = UserCreate(usuario.value!!,usuario.value!!,contrasenia.value!!,correo.value!!)
                                         val response3 =  apiService.createAccount(userCreate)
                                         val user: User = response3.body()!!
-                                        //Ingresar lógica de ir a la página de Home
+                                        updateMensaje("Usuario creado exitosamente.")
+                                        delay(2000)
                                         updateMensaje("")
-//                                        val appActivity =  Intent(context, AppActivity::class.java)
-//                                        appActivity.putExtra("user_id",user.id)
-//                                        context.startActivity(
-//                                            appActivity
-//                                        )
                                         withContext(Dispatchers.Main){
                                             navController.navigate("/login")
                                         }
@@ -104,7 +100,7 @@ class CreateAccountViewModel : ViewModel(){
                             }
                         }
                     }else{
-                        updateMensaje("Complete todas las casillas")
+                        updateMensaje("Error: Complete todas las casillas")
                     }
 
                 }

@@ -34,7 +34,8 @@ public fun ResetPaswordScreenPreview(){
     ResetPasswordScreen(
         ResetPasswordViewModel(),
         goToLoginScreen = {},
-        goToCreateAccountScreen = {}
+        goToCreateAccountScreen = {},
+        rememberNavController()
     )
 }
 
@@ -42,7 +43,8 @@ public fun ResetPaswordScreenPreview(){
 public fun ResetPasswordScreen(
     viewModel: ResetPasswordViewModel,
     goToLoginScreen: () -> Unit,
-    goToCreateAccountScreen: () -> Unit
+    goToCreateAccountScreen: () -> Unit,
+    navController: NavHostController
 ){
 
     val context = LocalContext.current as Activity
@@ -131,11 +133,12 @@ public fun ResetPasswordScreen(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 15.dp
+                    .padding(
+                        top = 15.dp
 /*, start = 40.dp, end = 40.dp*/
-), // start -> izquierda, end -> derecha
+                    ), // start -> izquierda, end -> derecha
                 onClick = {
-                        viewModel.reset(context)
+                        viewModel.reset(context,navController)
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = OrangeUL)
             ) {
@@ -152,9 +155,10 @@ public fun ResetPasswordScreen(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 5.dp
+                    .padding(
+                        top = 5.dp
 /*, start = 40.dp, end = 40.dp*/
-), // start -> izquierda, end -> derecha
+                    ), // start -> izquierda, end -> derecha
                 onClick = {
                     goToLoginScreen()
                 },

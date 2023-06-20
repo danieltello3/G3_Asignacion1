@@ -16,8 +16,8 @@ interface UserService {
     @POST("/user/create_account")
     suspend fun createAccount(@Body requestModel: UserCreate): Response<User>
 
-    @POST("/user/reset_password")
-    suspend fun resetPassword(@Body requestModel: UserResetPassword): Response<User>
+    //@POST("/user/reset_password")
+    //suspend fun resetPassword(@Body requestModel: UserResetPassword): Response<User>
 
     @GET("/user/get_username")
     suspend fun getUserName(
@@ -31,6 +31,6 @@ interface UserService {
 
     @GET("/user/get_email")
     suspend fun getEmail(
-        @Query("correo") email: String
+        @Query("email") email: String
     ): Response<User>
 }

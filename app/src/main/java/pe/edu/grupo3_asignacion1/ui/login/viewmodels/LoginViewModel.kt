@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pe.edu.grupo3_asignacion1.activities.AppActivity
@@ -59,6 +60,8 @@ class LoginViewModel(): ViewModel() {
                     val response = apiService.validate(UserValidate(user=usuario.value!!,password=contrasenia.value!!))
                     //Log.d("TAG.",response.toString())
                     if (response.code() == 200){
+                        updateMensaje("Inicio de sesión exitoso")
+                        delay(2000)
                         //Log.d("TAG.",response.body().toString())
                         val user: User = response.body()!!
                         Log.d("USER",user.toString())
@@ -66,7 +69,6 @@ class LoginViewModel(): ViewModel() {
                         val userDao = database.userDao()
                         userDao.deleteAll()
                         userDao.insert(user)
-                        updateMensaje("Usuario OK")
 
                         withContext(Dispatchers.Main) {
                             updateMensaje("")
@@ -79,8 +81,12 @@ class LoginViewModel(): ViewModel() {
 
                     }else if(response.code() == 500){
                         updateMensaje("Error: Usuario y contraseña no válidos")
+                        delay(3000)
+                        updateMensaje("")
                     }else{
                         updateMensaje("Error: Ocurrió un error no esperado")
+                        delay(3000)
+                        updateMensaje("")
                     }
                 }
 

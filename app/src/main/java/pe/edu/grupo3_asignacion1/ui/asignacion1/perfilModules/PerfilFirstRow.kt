@@ -108,6 +108,7 @@ fun PerfilFirstRow(
                 )
                 Text(
                     text = "Seguidores", fontSize = 17.sp,
+                    maxLines = 1,
                     color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     overflow = TextOverflow.Ellipsis

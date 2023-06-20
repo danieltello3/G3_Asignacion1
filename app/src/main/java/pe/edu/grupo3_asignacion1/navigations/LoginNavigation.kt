@@ -144,7 +144,8 @@ fun LoginNavigation(
                 },
                 goToCreateAccountScreen = {
                     navController.navigate("/create_account")
-                }
+                },
+                navController
 
             )
         }

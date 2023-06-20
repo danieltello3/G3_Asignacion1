@@ -14,6 +14,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pe.edu.grupo3_asignacion1.activities.AppActivity
@@ -35,7 +36,7 @@ class ResetPasswordViewModel:ViewModel(){
         _mensaje.postValue(it)
     }
 
-    fun reset(context: Context){
+    fun reset(context: Context,navController: NavHostController){
 
         val apiService = BackendClient.buildService(UserService::class.java)
         //Validar si el campo está lleno o vacío
@@ -53,12 +54,20 @@ class ResetPasswordViewModel:ViewModel(){
                             //val bool = UserService.verifyIfUserAlreadyExists(usuario.value!!)
                             if(response.code()==200){
                                 updateMensaje("Se envió correo para recuperar contrasenia.")
+                                delay(2000)
+                                withContext(Dispatchers.Main){
+                                    navController.navigate("/login")
+                                }
                             }
                         }else{
                             updateMensaje("Error: Ingrese un correo válido")
+                            delay(3000)
+                            updateMensaje("")
                         }
                     }else{
                         updateMensaje("Error: Complete el campo de Correo.")
+                        delay(3000)
+                        updateMensaje("")
                     }
                 }
             }catch (e:Exception){
